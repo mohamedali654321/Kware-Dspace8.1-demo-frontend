@@ -6,6 +6,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { hasValue } from '../empty.util';
 
 export const slide = trigger('slide', [
   state('expanded', style({ height: '*' })),
@@ -41,14 +42,27 @@ export const slideSidebar = trigger('slideSidebar', [
   transition('collapsed => expanded', animate(animation, expandedSidebarStyle)),
 ]);
 
+// export const slideSidebarPadding = trigger('slideSidebarPadding', [
+//   state('hidden', hiddenSidebarPageStyle),
+//   state('unpinned', unpinnedSidebarPageStyle, options),
+//   state('pinned', pinnedSidebarPageStyle, options),
+//   transition('hidden <=> unpinned', animate(animation)),
+//   transition('hidden <=> pinned', animate(animation)),
+//   transition('unpinned <=> pinned', animate(animation)),
+// ]);
+
 export const slideSidebarPadding = trigger('slideSidebarPadding', [
-  state('hidden', hiddenSidebarPageStyle),
-  state('unpinned', unpinnedSidebarPageStyle, options),
-  state('pinned', pinnedSidebarPageStyle, options),
+  state('hidden',(typeof window === 'object' && hasValue(window.localStorage)) && window.localStorage.getItem('selectedLangCode') === 'ar' ? style({ paddingRight: 0 }) : style({ paddingLeft: 0 })),
+  state('unpinned', (typeof window === 'object' && hasValue(window.localStorage)) && window.localStorage.getItem('selectedLangCode') === 'ar' ? style({ paddingRight: '{{ collapsedWidth }}' }) : style({ paddingLeft: '{{ collapsedWidth }}' }), options),
+  state('pinned',(typeof window === 'object' && hasValue(window.localStorage)) && window.localStorage.getItem('selectedLangCode') === 'ar' ? style({ paddingRight: '{{ expandedWidth }}' }) : style({ paddingLeft: '{{ expandedWidth }}' }), options),
+  // state('hidden', hiddenSidebarPageStyle),
+  // state('unpinned', unpinnedSidebarPageStyle, options),
+  // state('pinned', pinnedSidebarPageStyle, options),
   transition('hidden <=> unpinned', animate(animation)),
   transition('hidden <=> pinned', animate(animation)),
   transition('unpinned <=> pinned', animate(animation)),
 ]);
+
 
 export const expandSearchInput = trigger('toggleAnimation', [
   state('collapsed', style({
