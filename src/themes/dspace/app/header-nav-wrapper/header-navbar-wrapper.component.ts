@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  NgClass,
   NgIf,
 } from '@angular/common';
 import { Component } from '@angular/core';
@@ -18,8 +19,9 @@ import { slideMobileNav } from '../../../../app/shared/animations/slide';
   styleUrls: ['header-navbar-wrapper.component.scss'],
   templateUrl: 'header-navbar-wrapper.component.html',
   standalone: true,
-  imports: [ThemedHeaderComponent, ThemedNavbarComponent, AsyncPipe, TranslateModule, NgIf],
+  imports: [NgClass,ThemedHeaderComponent, ThemedNavbarComponent, AsyncPipe, TranslateModule, NgIf],
   animations: [slideMobileNav],
 })
 export class HeaderNavbarWrapperComponent extends BaseComponent {
+  lang: boolean = this.localeService.getCurrentLanguageCode() === 'ar' ? true : false; //kware-edit
 }

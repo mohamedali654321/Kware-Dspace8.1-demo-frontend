@@ -1,4 +1,4 @@
-<div ngbDropdown class="navbar-nav" *ngIf="moreThanOneLanguage" display="dynamic" placement="bottom-right">
+<!-- <div ngbDropdown class="navbar-nav" *ngIf="moreThanOneLanguage" display="dynamic" placement="bottom-right">
   <a href="javascript:void(0);" role="menuitem"
      [attr.aria-label]="'nav.language' |translate"
      aria-controls="language-menu-list"
@@ -18,4 +18,32 @@
                 {{ langLabel(lang) }}
     </li>
   </ul>
+</div> -->
+
+<!-- kware start edit -- issue.7.8.001
+* button to switch between ar , en languages
+-->
+
+<div
+  ngbDropdown
+  class="navbar-nav"
+  *ngIf="moreThanOneLanguage"
+  display="dynamic"
+  placement="bottom-right"
+>
+
+  <button
+    dsStopContextMenu
+    href="javascript:void(0);"
+    role="button"
+    [attr.aria-label]="'nav.language' | translate"
+    [title]="'nav.language' | translate"
+    class="px-1 lang-switcher-btn"
+    (click)="useLang(translate.currentLang === 'ar' ? 'en' : 'ar')"
+    tabindex="0"
+  >
+    {{ langLabel(translate.currentLang === "ar" ? "en" : "ar") }}
+  </button>
+ 
 </div>
+<!-- kware end edit -- issue.7.8.001 -->

@@ -1895,7 +1895,7 @@
 
   "footer.copyright": "copyright © 2002-{{ year }}",
 
-  "footer.link.dspace": "DSpace software 8.0",
+  "footer.link.dspace": "DSpace software 8.1",
 
   "footer.link.lyrasis": "LYRASIS",
 
@@ -8868,7 +8868,7 @@
 
   "repository.title.prefixDSpace": "Institutional Digital Repository ::",
 
-  "footer.link.copyrights": "© 2024 All Rights Reserved",
+  "footer.link.copyrights": "© 2025 All Rights Reserved",
 
   "home.news.dspace7": "DSpace 7",
 

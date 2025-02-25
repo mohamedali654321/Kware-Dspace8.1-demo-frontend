@@ -1,4 +1,4 @@
-<div class="ds-menu-item-wrapper text-md-center"
+<div class="ds-menu-item-wrapper text-md-center mobile-mode"
      [id]="'expandable-navbar-section-' + section.id"
      (mouseenter)="onMouseEnter($event)"
      (mouseleave)="onMouseLeave($event)"
@@ -35,3 +35,32 @@
     </div>
   </div>
 </div>
+
+
+<!-- kware start edit-- issue.8.0.006
+    *Make Browse by Metadata button by click not hover event
+    * display browse by menu by click rather than hover
+-->
+<div  ngbDropdown class="navbar-nav desktop-mode"
+    display="dynamic" placement="bottom-right">
+    <a href="#" role="button" class="dropdown-toggle nav-link dropdown-toggle"
+        (click)="$event.preventDefault()" data-toggle="dropdown"
+        ngbDropdownToggle
+        tabindex="2">
+        <ng-container
+            *ngComponentOutlet="(sectionMap$ | async).get(section.id).component;
+            injector: (sectionMap$ | async).get(section.id).injector;"></ng-container>
+    </a>
+
+    <ul ngbDropdownMenu class="dropdown-menu shadow-none border-0 m-0">
+        <ng-container *ngFor="let subSection of (subSections$ | async)">
+            <ng-container
+                *ngComponentOutlet="(sectionMap$ |
+                async).get(subSection.id).component; injector: (sectionMap$ |
+                async).get(subSection.id).injector;"></ng-container>
+        </ng-container>
+
+    </ul>
+</div>
+
+<!-- kware start edit -- issue.8.0.006 -->

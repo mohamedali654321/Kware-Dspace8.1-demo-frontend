@@ -1,6 +1,8 @@
 import {
   AsyncPipe,
+  NgClass,
   NgIf,
+  NgStyle,
 } from '@angular/common';
 import {
   Component,
@@ -27,10 +29,12 @@ import { ImpersonateNavbarComponent } from '../../../../app/shared/impersonate-n
   styleUrls: ['header.component.scss'],
   templateUrl: 'header.component.html',
   standalone: true,
-  imports: [NgbDropdownModule, ThemedLangSwitchComponent, RouterLink, ThemedSearchNavbarComponent, ContextHelpToggleComponent, ThemedAuthNavMenuComponent, ImpersonateNavbarComponent, ThemedNavbarComponent, TranslateModule, AsyncPipe, NgIf],
+  imports: [NgbDropdownModule,NgStyle,NgClass, ThemedLangSwitchComponent, RouterLink, ThemedSearchNavbarComponent, ContextHelpToggleComponent, ThemedAuthNavMenuComponent, ImpersonateNavbarComponent, ThemedNavbarComponent, TranslateModule, AsyncPipe, NgIf],
 })
 export class HeaderComponent extends BaseComponent implements OnInit {
   public isNavBarCollapsed$: Observable<boolean>;
+
+  lang: boolean = this.localeService.getCurrentLanguageCode() === 'ar' ? true : false; //kware-edit
 
   ngOnInit() {
     super.ngOnInit();

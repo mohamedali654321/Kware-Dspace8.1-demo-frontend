@@ -24,6 +24,7 @@ import { MenuID } from '../../shared/menu/menu-id.model';
 import { MenuSection } from '../../shared/menu/menu-section.model';
 import { HoverOutsideDirective } from '../../shared/utils/hover-outside.directive';
 import { NavbarSectionComponent } from '../navbar-section/navbar-section.component';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 /**
  * Represents an expandable section in the navbar
@@ -41,6 +42,7 @@ import { NavbarSectionComponent } from '../navbar-section/navbar-section.compone
     NgFor,
     NgIf,
     RouterLinkActive,
+    NgbDropdownModule
   ],
 })
 export class ExpandableNavbarSectionComponent extends NavbarSectionComponent implements AfterViewChecked, OnInit, OnDestroy {

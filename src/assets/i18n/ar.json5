@@ -1895,7 +1895,7 @@
 
   "footer.copyright": "حقوق النشر © 2002-{{ year }}",
 
-  "footer.link.dspace": "برمجيات دي سبيس 8.0",
+  "footer.link.dspace": "برمجيات دي سبيس 8.1",
 
   "footer.link.lyrasis": "ليراسيس",
 
@@ -9862,7 +9862,7 @@
   "repository.title.prefix": "المستودع الرقمي المؤسسي :: ",
 
   "repository.title.prefixDSpace": "المستودع الرقمي المؤسسي :: ",
-  "footer.link.copyrights": "© 2024 جميع الحقوق محفوظة",
+  "footer.link.copyrights": "© 2025 جميع الحقوق محفوظة",
   "footer.top.content1": " مؤسسة تقنية المعارف",
 
   "form.create": "إنشاء",
