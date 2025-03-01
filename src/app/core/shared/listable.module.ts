@@ -122,6 +122,64 @@ import { TruncatableComponent } from '../../shared/truncatable/truncatable.compo
 import { TruncatablePartComponent } from '../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { ThemedThumbnailComponent } from '../../thumbnail/themed-thumbnail.component';
 import { ThumbnailComponent } from '../../thumbnail/thumbnail.component';
+import { JournalIssueItemMetadataListElementComponent } from 'src/app/entity-groups/journal-entities/metadata-representations/journal-issue/journal-issue-item-metadata-list-element.component';
+import { JournalVolumeItemMetadataListElementComponent } from 'src/app/entity-groups/journal-entities/metadata-representations/journal-volume/journal-volume-item-metadata-list-element.component';
+import { JournalItemMetadataListElementComponent } from 'src/app/entity-groups/journal-entities/metadata-representations/journal/journal-item-metadata-list-element.component';
+import { ActivityGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/activity/activity-grid-element.component';
+import { EraGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/era/era-grid-element.component';
+import { EventGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/event/event-grid-element.component';
+import { PlaceGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/place/place-grid-element.component';
+import { ActivitySearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/activity/activity-search-result-grid-element.component';
+import { EraSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/era/era-search-result-grid-element.component';
+import { EventSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/event/event-search-result-grid-element.component';
+import { PlaceSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/place/place-search-result-grid-element.component';
+import { SeriesSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/series/series-search-result-grid-element.component';
+import { SiteSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/site/site-search-result-grid-element.component';
+import { SubOrgUnitSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/sub-org-unit/sub-org-unit-search-result-grid-element.component';
+import { SubjectSearchResultGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/search-result-grid-elements/subject/subject-search-result-grid-element.component';
+import { SeriesGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/series/series-grid-element.component';
+import { SiteGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/site/site-grid-element.component';
+import { SubOrgUnitGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/sub-org-unit/sub-org-unit-grid-element.component';
+import { SubjectGridElementComponent } from 'src/app/entity-groups/research-entities/item-grid-elements/subject/subject-grid-element.component';
+import { ActivityListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/activity/activity-list-element.component';
+import { EraListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/era/era-list-element.component';
+import { EventListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/event/event-list-element.component';
+import { PlaceListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/place/place-list-element.component';
+import { ActivitySearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/activity/activity-search-result-list-element.component';
+import { EraSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/era/era-search-result-list-element.component';
+import { EventSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/event/event-search-result-list-element.component';
+import { PlaceSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/place/place-search-result-list-element.component';
+import { SeriesSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/series/series-search-result-list-element.component';
+import { SiteSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/site/site-search-result-list-element.component';
+import { SubOrgUnitSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/sub-org-unit/sub-org-unit-search-result-list-element.component';
+import { SubjectSearchResultListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/search-result-list-elements/subject/subject-search-result-list-element.component';
+import { SeriesListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/series/series-list-element.component';
+import { ActivitySidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/activity/activity-sidebar-search-list-element.component';
+import { EraSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/era/era-sidebar-search-list-element.component';
+import { EventSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/event/event-sidebar-search-list-element.component';
+import { PlaceSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/place/place-sidebar-search-list-element.component';
+import { SeriesSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/series/series-sidebar-search-list-element.component';
+import { SiteSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/site/site-sidebar-search-list-element.component';
+import { SubOrgUnitSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/sub-org-unit/sub-org-unit-sidebar-search-list-element.component';
+import { SubjectSidebarSearchListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/sidebar-search-list-elements/subject/subject-sidebar-search-list-element.component';
+import { SiteListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/site/site-list-element.component';
+import { SubjectSiteListElementComponent } from 'src/app/entity-groups/research-entities/item-list-elements/subject/subject-list-element.component';
+import { ActivityComponent } from 'src/app/entity-groups/research-entities/item-pages/activity/activity.component';
+import { EraComponent } from 'src/app/entity-groups/research-entities/item-pages/era/era.component';
+import { EventComponent } from 'src/app/entity-groups/research-entities/item-pages/event/event.component';
+import { PlaceComponent } from 'src/app/entity-groups/research-entities/item-pages/place/place.component';
+import { SeriesComponent } from 'src/app/entity-groups/research-entities/item-pages/series/series.component';
+import { SiteComponent } from 'src/app/entity-groups/research-entities/item-pages/site/site.component';
+import { SubOrgUnitComponent } from 'src/app/entity-groups/research-entities/item-pages/sub-org-unit/sub-org-unit.component';
+import { SubjectComponent } from 'src/app/entity-groups/research-entities/item-pages/subject/subject.component';
+import { ActivityItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/activity/activity-item-metadata-list-element.component';
+import { EraItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/era/era-item-metadata-list-element.component';
+import { EventItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/event/event-item-metadata-list-element.component';
+import { PlaceItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/place/place-item-metadata-list-element.component';
+import { SeriesItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/series/series-item-metadata-list-element.component';
+import { SiteItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/site/site-item-metadata-list-element.component';
+import { SubOrgUnitItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/sub-org-unit/sub-org-unit-item-metadata-list-element.component';
+import { SubjectItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/subject/subject-item-metadata-list-element.component';
 
 const ENTRY_COMPONENTS = [
   BitstreamListItemComponent,
@@ -207,6 +265,78 @@ const ENTRY_COMPONENTS = [
   ItemSearchResultListElementSubmissionComponent,
   PublicationComponent,
   UntypedItemComponent,
+
+  SubjectComponent,
+  SubjectItemMetadataListElementComponent,
+  SubjectSearchResultGridElementComponent,
+  SubjectGridElementComponent,
+  SubjectSiteListElementComponent,
+  SubjectSidebarSearchListElementComponent,
+  SubjectSearchResultListElementComponent,
+   /* kware start edit -- issue.8.0.009
+  - Add new entities (administration , place,site,series,event,activity)
+  */
+
+  SubOrgUnitComponent,
+  SiteComponent,
+  ActivityComponent,
+  EraComponent,
+  EventComponent,
+  PlaceComponent,
+  SeriesComponent,
+  ActivitySearchResultGridElementComponent,
+  EraSearchResultGridElementComponent,
+  EventSearchResultGridElementComponent,
+  PlaceSearchResultGridElementComponent,
+  SeriesSearchResultGridElementComponent,
+  SiteSearchResultGridElementComponent,
+  SubOrgUnitSearchResultGridElementComponent,
+  SubOrgUnitGridElementComponent,
+  SiteGridElementComponent,
+  SeriesGridElementComponent,
+  PlaceGridElementComponent,
+  EventGridElementComponent,
+  EraGridElementComponent,
+  ActivityGridElementComponent,
+  SubOrgUnitSidebarSearchListElementComponent,
+  SiteSidebarSearchListElementComponent,
+  SeriesSidebarSearchListElementComponent,
+  PlaceSidebarSearchListElementComponent,
+  EventSidebarSearchListElementComponent,
+  EraSidebarSearchListElementComponent,
+  ActivitySidebarSearchListElementComponent,
+  ActivitySearchResultListElementComponent,
+  EraSearchResultListElementComponent,
+  EventSearchResultListElementComponent,
+  PlaceSearchResultListElementComponent,
+  SeriesSearchResultListElementComponent,
+  SiteSearchResultListElementComponent,
+  SubOrgUnitSearchResultListElementComponent,
+  SiteListElementComponent,
+  SeriesListElementComponent,
+  PlaceListElementComponent,
+  EventListElementComponent,
+  EraListElementComponent,
+  ActivityListElementComponent,
+
+  // kware end edit -- issue.8.0.009
+
+ /* kware start edit -- issue.8.0.021
+  - Metadata Visualization (representation) for all new entities
+  */
+  SubOrgUnitItemMetadataListElementComponent,
+  SiteItemMetadataListElementComponent,
+  SeriesItemMetadataListElementComponent,
+  PlaceItemMetadataListElementComponent,
+  EventItemMetadataListElementComponent,
+  EraItemMetadataListElementComponent,
+  ActivityItemMetadataListElementComponent,
+  JournalVolumeItemMetadataListElementComponent,
+  JournalIssueItemMetadataListElementComponent,
+  JournalItemMetadataListElementComponent,
+  // kware end edit -- issue.8.0.021
+
+
 ];
 
 @NgModule({

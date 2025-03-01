@@ -24,6 +24,8 @@ import { SearchResultGridElementComponent } from '../../../../../shared/object-g
 import { ThemeService } from '../../../../../shared/theme-support/theme.service';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { ItemAdminSearchResultActionsComponent } from '../../item-admin-search-result-actions.component';
+import { LinkService } from 'src/app/core/cache/builders/link.service';
+import { LocaleService } from 'src/app/core/locale/locale.service';
 
 @listableObjectComponent(ItemSearchResult, ViewMode.GridElement, Context.AdminSearch)
 @Component({
@@ -48,8 +50,11 @@ export class ItemAdminSearchResultGridElementComponent extends SearchResultGridE
     protected truncatableService: TruncatableService,
     protected bitstreamDataService: BitstreamDataService,
     private themeService: ThemeService,
+    public localeService: LocaleService ,
+    protected linkService: LinkService,
+
   ) {
-    super(dsoNameService, truncatableService, bitstreamDataService);
+    super(dsoNameService, truncatableService, bitstreamDataService,linkService,localeService);
   }
 
   /**

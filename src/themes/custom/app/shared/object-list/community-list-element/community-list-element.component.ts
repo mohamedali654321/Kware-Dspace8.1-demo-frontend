@@ -7,6 +7,7 @@ import { Context } from '../../../../../../app/core/shared/context.model';
 import { ViewMode } from '../../../../../../app/core/shared/view-mode.model';
 import { listableObjectComponent } from '../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { CommunityListElementComponent as BaseComponent } from '../../../../../../app/shared/object-list/community-list-element/community-list-element.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @listableObjectComponent(Community, ViewMode.ListElement, Context.Any, 'custom')
 
@@ -17,7 +18,7 @@ import { CommunityListElementComponent as BaseComponent } from '../../../../../.
   // templateUrl: './community-list-element.component.html'
   templateUrl: '../../../../../../app/shared/object-list/community-list-element/community-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink],
+  imports: [NgIf, RouterLink,KwareTranslatePipe],
 })
 /**
  * Component representing a list element for a community

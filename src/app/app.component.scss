@@ -1049,9 +1049,9 @@
 
 
 
-// ::ng-deep ds-base-root main {
-//     margin-top: 85px !important;
-// }
+::ng-deep ds-base-root main {
+    margin-top: 85px !important;
+}
 
 
 
@@ -1636,7 +1636,7 @@
 
 @media screen and (max-width:768px) {
     ::ng-deep ds-root main {
-        // margin-top: 125px !important;
+        margin-top: 125px !important;
 
     }
 

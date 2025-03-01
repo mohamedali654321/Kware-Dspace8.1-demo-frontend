@@ -25,13 +25,15 @@ import { listableObjectComponent } from '../../../object-collection/shared/lista
 import { TruncatableService } from '../../../truncatable/truncatable.service';
 import { followLink } from '../../../utils/follow-link-config.model';
 import { SearchResultGridElementComponent } from '../search-result-grid-element.component';
+import { LocaleService } from 'src/app/core/locale/locale.service';
+import { KwareTranslatePipe } from "../../../utils/kware-translate.pipe";
 
 @Component({
   selector: 'ds-collection-search-result-grid-element',
   styleUrls: ['../search-result-grid-element.component.scss', 'collection-search-result-grid-element.component.scss'],
   templateUrl: 'collection-search-result-grid-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, AsyncPipe, TranslateModule],
+  imports: [NgIf, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, AsyncPipe, TranslateModule, KwareTranslatePipe],
 })
 /**
  * Component representing a grid element for a collection search result
@@ -42,11 +44,12 @@ export class CollectionSearchResultGridElementComponent extends SearchResultGrid
 
   constructor(
     public dsoNameService: DSONameService,
-    private linkService: LinkService,
+    protected linkService: LinkService,
     protected truncatableService: TruncatableService,
     protected bitstreamDataService: BitstreamDataService,
+    public localeService: LocaleService ,
   ) {
-    super(dsoNameService, truncatableService, bitstreamDataService);
+    super(dsoNameService, truncatableService, bitstreamDataService,linkService,localeService);
   }
 
   // @ts-ignore

@@ -17,6 +17,9 @@ import { MetadataFieldWrapperComponent } from '../../../../shared/metadata-field
 import { listableObjectComponent } from '../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail.component';
+import { ThemedMediaViewerComponent } from 'src/app/item-page/media-viewer/themed-media-viewer.component';
+import { ItemPageImgFieldComponent } from 'src/app/item-page/simple/field-components/specific-field/img/item-page-img-field.component';
+import { ThemedMetadataRepresentationListComponent } from 'src/app/item-page/simple/metadata-representation-list/themed-metadata-representation-list.component';
 
 @listableObjectComponent('Journal', ViewMode.StandalonePage)
 @Component({
@@ -24,7 +27,7 @@ import { ThemedThumbnailComponent } from '../../../../thumbnail/themed-thumbnail
   styleUrls: ['./journal.component.scss'],
   templateUrl: './journal.component.html',
   standalone: true,
-  imports: [NgIf, ThemedResultsBackButtonComponent, ThemedItemPageTitleFieldComponent, DsoEditMenuComponent, MetadataFieldWrapperComponent, ThemedThumbnailComponent, GenericItemPageFieldComponent, RelatedItemsComponent, RouterLink, TabbedRelatedEntitiesSearchComponent, AsyncPipe, TranslateModule],
+  imports: [NgIf, ThemedResultsBackButtonComponent, ThemedItemPageTitleFieldComponent,ThemedMetadataRepresentationListComponent, DsoEditMenuComponent, MetadataFieldWrapperComponent, ThemedThumbnailComponent, GenericItemPageFieldComponent, RelatedItemsComponent, RouterLink, TabbedRelatedEntitiesSearchComponent, AsyncPipe, TranslateModule,ThemedMediaViewerComponent],
 })
 /**
  * The component for displaying metadata and relations of an item of the type Journal

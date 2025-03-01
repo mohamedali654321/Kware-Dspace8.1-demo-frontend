@@ -14,13 +14,14 @@ import { ThemedBadgesComponent } from '../../../object-collection/shared/badges/
 import { CommunitySearchResult } from '../../../object-collection/shared/community-search-result.model';
 import { listableObjectComponent } from '../../../object-collection/shared/listable-object/listable-object.decorator';
 import { SearchResultListElementComponent } from '../search-result-list-element.component';
+import { KwareTranslatePipe } from "../../../utils/kware-translate.pipe";
 
 @Component({
   selector: 'ds-community-search-result-list-element',
   styleUrls: ['../search-result-list-element.component.scss', 'community-search-result-list-element.component.scss'],
   templateUrl: 'community-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, NgClass, ThemedBadgesComponent, RouterLink],
+  imports: [NgIf, NgClass, ThemedBadgesComponent, RouterLink, KwareTranslatePipe],
 })
 /**
  * Component representing a community search result in list view

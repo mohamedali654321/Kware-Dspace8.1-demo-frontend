@@ -120,6 +120,7 @@
     "pem": "1.14.8",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.0",
+    "seamless-scroll-polyfill": "^2.3.4",
     "uuid": "^8.3.2",
     "zone.js": "~0.15.0"
   },

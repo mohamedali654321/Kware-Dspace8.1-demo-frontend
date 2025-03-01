@@ -7,20 +7,34 @@
 <div class="row">
   <div class="col-xs-12 col-md-4">
     <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
-      <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+      <ng-container *ngIf="!mediaViewer.image">
+        <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+          <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+        </ds-metadata-field-wrapper>
+      </ng-container>
+      <ng-container *ngIf="mediaViewer.image">
+        <ds-media-viewer [item]="object"></ds-media-viewer> 
+            </ng-container>
     </ds-metadata-field-wrapper>
-    <ds-generic-item-page-field [item]="object"
+    <br>
+    <!-- <ds-generic-item-page-field [item]="object"
       [fields]="['publicationvolume.volumeNumber']"
       [label]="'journalvolume.page.volume'">
     </ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
       [fields]="['publicationissue.issueNumber']"
       [label]="'journalissue.page.number'">
-    </ds-generic-item-page-field>
+    </ds-generic-item-page-field> -->
     <ds-generic-item-page-field [item]="object"
       [fields]="['creativework.datePublished']"
       [label]="'journalissue.page.issuedate'">
     </ds-generic-item-page-field>
+
+    <ds-generic-item-page-field [item]="object"
+    [fields]="['dc.description.frequancy']"
+    [label]="'journalissue.page.frequancy'">
+  </ds-generic-item-page-field>
+
     <ds-generic-item-page-field [item]="object"
       [fields]="['journal.title']"
       [label]="'journalissue.page.journal-title'">
@@ -31,17 +45,29 @@
     </ds-generic-item-page-field>
   </div>
   <div class="col-xs-12 col-md-6">
-    <ds-related-items
-      [parentItem]="object"
-      [relationType]="'isJournalVolumeOfIssue'"
-      [label]="'relationships.isSingleVolumeOf' | translate">
-    </ds-related-items>
-    <ds-related-items
-      class="mb-1 mt-1"
-      [parentItem]="object"
-      [relationType]="'isPublicationOfJournalIssue'"
-      [label]="'relationships.isPublicationOfJournalIssue' | translate">
-    </ds-related-items>
+    <!-- <ds-simple-view-statistics [object]="object"></ds-simple-view-statistics> -->
+    <ds-generic-item-page-field [item]="object"
+    [fields]="['publicationissue.title.theme']"
+    [label]="'item.page.mainTitle'">
+  </ds-generic-item-page-field>
+         <!-- mohamed start edit -->
+         <!-- <div class="desktop-mode">
+          <ds-media-viewer-switcher [item]="object"></ds-media-viewer-switcher>
+         </div> -->
+         <!-- <ds-media-viewer-switcher></ds-media-viewer-switcher> -->
+          <!-- mohamed end edit -->
+   <!-- <ds-pdf-viewer [item]="object"></ds-pdf-viewer> -->
+
+
+    <ds-generic-item-page-field [item]="object"
+    [fields]="['dc.description.abstract']"
+    [label]="'journalissue.page.abstract'">
+  </ds-generic-item-page-field>
+  
+  <ds-generic-item-page-field [item]="object"
+  [fields]="['dc.description.tableofcontents']"
+  [label]="'journalissue.page.tableofcontents'"> 
+</ds-generic-item-page-field>
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.description']"
       [label]="'journalissue.page.description'">
@@ -50,10 +76,44 @@
       [fields]="['creativework.keywords']"
       [label]="'journalissue.page.keyword'">
     </ds-generic-item-page-field>
+
+    <ds-generic-item-page-field [item]="object"
+    [fields]="['dc.subject']"
+    [separator]="','"
+    [label]="'item.page.subject'">
+  </ds-generic-item-page-field>
+
+    <ds-related-items
+    [parentItem]="object"
+    [relationType]="'isJournalVolumeOfIssue'"
+    [label]="'relationships.isSingleVolumeOf' | translate">
+  </ds-related-items>
+  <!-- <ds-related-items
+    class="mb-1 mt-1"
+    [parentItem]="object"
+    [relationType]="'isPublicationOfJournalIssue'"
+    [label]="'relationships.isPublicationOfJournalIssue' | translate">
+  </ds-related-items> -->
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']">
         {{"item.page.link.full" | translate}}
       </a>
     </div>
+  </div>
+  <div class="mt-5 w-100">
+    <ds-tabbed-related-entities-search  [item]="object"
+                                        [relationTypes]="[
+                                          {
+                                          label: 'isPublicationOfJournalIssue',
+                                          filter: 'isJournalIssueOfPublication',
+                                          configuration: 'default-relationships'
+                                        },
+                                        {
+                                          label: 'isJournalVolumeOfIssue',
+                                          filter: 'isIssueOfJournalVolume',
+                                          configuration: 'volume-relationships'
+                                        },
+                                        ]">
+    </ds-tabbed-related-entities-search>
   </div>
 </div>

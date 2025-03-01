@@ -32,6 +32,8 @@ import { TruncatableService } from '../../../../../shared/truncatable/truncatabl
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
 import { NameVariantModalComponent } from '../../name-variant-modal/name-variant-modal.component';
 import { PersonInputSuggestionsComponent } from './person-suggestions/person-input-suggestions.component';
+import { LinkService } from 'src/app/core/cache/builders/link.service';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.EntitySearchModalWithNameVariants)
 @Component({
@@ -39,7 +41,7 @@ import { PersonInputSuggestionsComponent } from './person-suggestions/person-inp
   styleUrls: ['./person-search-result-list-submission-element.component.scss'],
   templateUrl: './person-search-result-list-submission-element.component.html',
   standalone: true,
-  imports: [NgIf, ThemedThumbnailComponent, NgClass, PersonInputSuggestionsComponent, FormsModule, NgFor, AsyncPipe],
+  imports: [NgIf, ThemedThumbnailComponent, NgClass, PersonInputSuggestionsComponent, FormsModule, NgFor, AsyncPipe,KwareTranslatePipe],
 })
 
 /**
@@ -61,9 +63,10 @@ export class PersonSearchResultListSubmissionElementComponent extends SearchResu
               private itemDataService: ItemDataService,
               private selectableListService: SelectableListService,
               public dsoNameService: DSONameService,
+              protected linkService: LinkService,
               @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
-    super(truncatableService, dsoNameService, appConfig);
+    super(truncatableService, dsoNameService,linkService, appConfig);
   }
 
   ngOnInit() {

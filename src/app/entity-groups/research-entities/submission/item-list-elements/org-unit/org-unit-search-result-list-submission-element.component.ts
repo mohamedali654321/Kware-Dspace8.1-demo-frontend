@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf ,AsyncPipe } from '@angular/common';
 import {
   Component,
   Inject,
@@ -29,15 +29,19 @@ import { SelectableListService } from '../../../../../shared/object-list/selecta
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { NameVariantModalComponent } from '../../name-variant-modal/name-variant-modal.component';
 import { OrgUnitInputSuggestionsComponent } from './org-unit-suggestions/org-unit-input-suggestions.component';
+import { LinkService } from 'src/app/core/cache/builders/link.service';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
+import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
+
 
 @listableObjectComponent('OrgUnitSearchResult', ViewMode.ListElement, Context.EntitySearchModal)
 @listableObjectComponent('OrgUnitSearchResult', ViewMode.ListElement, Context.EntitySearchModalWithNameVariants)
 @Component({
-  selector: 'ds-org-unit-search-result-list-submission-element',
+  selector: 'ds-person-search-result-list-submission-element',
   styleUrls: ['./org-unit-search-result-list-submission-element.component.scss'],
   templateUrl: './org-unit-search-result-list-submission-element.component.html',
   standalone: true,
-  imports: [NgIf, OrgUnitInputSuggestionsComponent, FormsModule],
+  imports: [NgIf,AsyncPipe,ThemedThumbnailComponent, OrgUnitInputSuggestionsComponent, FormsModule,KwareTranslatePipe],
 })
 
 /**
@@ -63,9 +67,10 @@ export class OrgUnitSearchResultListSubmissionElementComponent extends SearchRes
               private bitstreamDataService: BitstreamDataService,
               private selectableListService: SelectableListService,
               public dsoNameService: DSONameService,
+              protected linkService: LinkService,
               @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
-    super(truncatableService, dsoNameService, appConfig);
+    super(truncatableService, dsoNameService,linkService, appConfig);
   }
 
   ngOnInit() {

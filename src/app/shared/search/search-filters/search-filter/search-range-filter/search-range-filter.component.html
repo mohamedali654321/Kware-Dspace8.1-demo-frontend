@@ -36,6 +36,7 @@
                         [dsDebounce]="250"
                         (change)="onSliderChange($event)"
                         (keydown)="startKeyboardControl()" (keyup)="stopKeyboardControl()"
+                        [config]="{direction:direction}"
                         [(ngModel)]="range" ngDefaultControl>
             </nouislider>
         </ng-container>

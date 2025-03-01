@@ -12,6 +12,11 @@ import { hasValue } from '../../empty.util';
 import { AbstractListableElementComponent } from '../../object-collection/shared/object-collection-element/abstract-listable-element.component';
 import { SearchResult } from '../../search/models/search-result.model';
 import { TruncatableService } from '../../truncatable/truncatable.service';
+import { LinkService } from 'src/app/core/cache/builders/link.service';
+import { LocaleService } from 'src/app/core/locale/locale.service';
+import { Item } from 'src/app/core/shared/item.model';
+import { followLink } from '../../utils/follow-link-config.model';
+
 
 @Component({
   selector: 'ds-search-result-grid-element',
@@ -33,6 +38,8 @@ export class SearchResultGridElementComponent<T extends SearchResult<K>, K exten
     public dsoNameService: DSONameService,
     protected truncatableService: TruncatableService,
     protected bitstreamDataService: BitstreamDataService,
+    protected linkService: LinkService, //kware-edit
+    public localeService: LocaleService  /* kware edit - call service from LocaleService */
   ) {
     super(dsoNameService);
   }
@@ -44,6 +51,10 @@ export class SearchResultGridElementComponent<T extends SearchResult<K>, K exten
     if (hasValue(this.object)) {
       this.dso = this.object.indexableObject;
       this.isCollapsed$ = this.isCollapsed();
+
+      
+      this.linkService.resolveLink<Item>(this.dso, followLink('thumbnail')); //kware-edit
+      this.linkService.resolveLink<Item>(this.dso, followLink('version')); //kware-edit
     }
   }
 
@@ -67,7 +78,7 @@ export class SearchResultGridElementComponent<T extends SearchResult<K>, K exten
     return Metadata.firstValue([this.object.hitHighlights, this.dso.metadata], keyOrKeys);
   }
 
-  private isCollapsed(): Observable<boolean> {
+  public isCollapsed(): Observable<boolean> {
     return this.truncatableService.isCollapsed(this.dso.id);
   }
 }

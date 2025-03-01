@@ -9944,6 +9944,7 @@
 "activities.search.results.head":"Search results for Activities",
 "query.filter.departmentName":"Department",
 "query.filter.collegeName":"College",
+ "item.page.orcid.tooltip": "Open ORCID setting page",
 }
 
 

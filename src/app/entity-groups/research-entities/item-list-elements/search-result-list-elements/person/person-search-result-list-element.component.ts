@@ -1,13 +1,14 @@
 import {
   AsyncPipe,
+  DatePipe,
   NgClass,
   NgFor,
   NgIf,
+  NgStyle,
 } from '@angular/common';
 import {
   Component,
   Inject,
-  OnInit,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -25,6 +26,13 @@ import { TruncatableComponent } from '../../../../../shared/truncatable/truncata
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
 import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbnail.component';
+import { LinkService } from 'src/app/core/cache/builders/link.service';
+import { LocaleService } from 'src/app/core/locale/locale.service';
+import { ThemedMetadataRepresentationListComponent } from 'src/app/item-page/simple/metadata-representation-list/themed-metadata-representation-list.component';
+import { ThemedTypeBadgeComponent } from 'src/app/shared/object-collection/shared/badges/type-badge/themed-type-badge.component';
+import { PublictaionCountComponent } from 'src/app/shared/publictaion-count/publictaion-count.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
+import { ViewStatisticsComponent } from 'src/app/shared/view-statistics/view-statistics.component';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement)
 @Component({
@@ -32,19 +40,21 @@ import { ThemedThumbnailComponent } from '../../../../../thumbnail/themed-thumbn
   styleUrls: ['./person-search-result-list-element.component.scss'],
   templateUrl: './person-search-result-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, NgClass, ThemedBadgesComponent, TruncatableComponent, TruncatablePartComponent, NgFor, AsyncPipe, TranslateModule],
+  imports: [TruncatableComponent, NgIf,NgFor, RouterLink, ThemedThumbnailComponent, ThemedBadgesComponent, TruncatablePartComponent, AsyncPipe, DatePipe, TranslateModule,NgClass,KwareTranslatePipe,NgStyle,ViewStatisticsComponent,PublictaionCountComponent,ThemedMetadataRepresentationListComponent,ThemedTypeBadgeComponent],
 })
 /**
  * The component for displaying a list element for an item search result of the type Person
  */
-export class PersonSearchResultListElementComponent extends ItemSearchResultListElementComponent implements OnInit {
+export class PersonSearchResultListElementComponent extends ItemSearchResultListElementComponent {
 
   public constructor(
     protected truncatableService: TruncatableService,
     public dsoNameService: DSONameService,
+    protected linkService: LinkService,
+    public localeService: LocaleService, //kware-edit
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
-    super(truncatableService, dsoNameService, appConfig);
+    super(truncatableService, dsoNameService,linkService, appConfig);
   }
 
   /**
@@ -55,5 +65,19 @@ export class PersonSearchResultListElementComponent extends ItemSearchResultList
   ngOnInit(): void {
     super.ngOnInit();
     this.showThumbnails = this.appConfig.browseBy.showThumbnails;
+  }
+
+  
+   // replace comma ', or ;' to '،' if language  is Arabic
+   convertComma(str: string): string{
+    let newstr = '';
+    if (this.localeService.getCurrentLanguageCode() === 'ar'){
+      let regx = /;|,/gi;
+     newstr = str?.replace(regx, '،');
+     return newstr;
+
+    } else {
+      return str;
+    }
   }
 }

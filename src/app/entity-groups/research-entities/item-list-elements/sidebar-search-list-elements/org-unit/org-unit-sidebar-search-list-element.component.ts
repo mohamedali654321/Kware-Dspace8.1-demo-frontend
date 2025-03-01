@@ -13,6 +13,7 @@ import { ItemSearchResult } from '../../../../../shared/object-collection/shared
 import { listableObjectComponent } from '../../../../../shared/object-collection/shared/listable-object/listable-object.decorator';
 import { SidebarSearchListElementComponent } from '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @listableObjectComponent('OrgUnitSearchResult', ViewMode.ListElement, Context.SideBarSearchModal)
 @listableObjectComponent('OrgUnitSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent)
@@ -20,7 +21,7 @@ import { TruncatablePartComponent } from '../../../../../shared/truncatable/trun
   selector: 'ds-org-unit-sidebar-search-list-element',
   templateUrl: '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component.html',
   standalone: true,
-  imports: [TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule],
+  imports: [TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule,KwareTranslatePipe],
 })
 /**
  * Component displaying a list element for a {@link ItemSearchResult} of type "OrgUnit" within the context of

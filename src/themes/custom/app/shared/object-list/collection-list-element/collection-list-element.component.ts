@@ -7,6 +7,7 @@ import { Context } from '../../../../../../app/core/shared/context.model';
 import { ViewMode } from '../../../../../../app/core/shared/view-mode.model';
 import { listableObjectComponent } from '../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { CollectionListElementComponent as BaseComponent } from '../../../../../../app/shared/object-list/collection-list-element/collection-list-element.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @listableObjectComponent(Collection, ViewMode.ListElement, Context.Any, 'custom')
 
@@ -17,7 +18,7 @@ import { CollectionListElementComponent as BaseComponent } from '../../../../../
   // templateUrl: './collection-list-element.component.html'
   templateUrl: '../../../../../../app/shared/object-list/collection-list-element/collection-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink],
+  imports: [NgIf, RouterLink,KwareTranslatePipe],
 })
 /**
  * Component representing list element for a collection

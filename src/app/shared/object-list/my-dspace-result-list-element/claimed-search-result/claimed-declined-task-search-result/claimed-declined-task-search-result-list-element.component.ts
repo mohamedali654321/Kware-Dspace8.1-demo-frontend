@@ -64,7 +64,7 @@ export class ClaimedDeclinedTaskSearchResultListElementComponent extends SearchR
     public dsoNameService: DSONameService,
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
   ) {
-    super(truncatableService, dsoNameService, appConfig);
+    super(truncatableService, dsoNameService, linkService,appConfig);
   }
 
   /**

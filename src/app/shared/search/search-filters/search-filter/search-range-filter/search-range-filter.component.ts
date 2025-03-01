@@ -41,6 +41,7 @@ import {
   RANGE_FILTER_MAX_SUFFIX,
   RANGE_FILTER_MIN_SUFFIX,
 } from './search-range-filter-constants';
+import { LocaleService } from 'src/app/core/locale/locale.service';
 
 /**
  * This component renders a simple item page.
@@ -63,7 +64,15 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
   /**
    * Fallback minimum for the range
    */
-  min = 1950;
+  min = 1;
+
+      /** kware start edit -- issue.7.8.001
+     * RTL Customization
+ * check locale of interface
+ */
+      direction: string;
+
+      /** kware start edit -- issue.7.8.006 */
 
   /**
    * i18n Label to use for minimum field
@@ -108,6 +117,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
               protected route: RouteService,
               protected rdbs: RemoteDataBuildService,
               private translateService: TranslateService,
+              public localeService: LocaleService , /* kware edit - call service from LocaleService */
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
               @Inject(PLATFORM_ID) private platformId: any,
   ) {
@@ -148,6 +158,13 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
         { 'aria-label': this.maxLabel },
       ],
     };
+
+         /** kware start edit -- issue.7.8.001
+      * RTL Customization
+ * check locale of interface
+     */
+         this.direction = this.localeService.getCurrentLanguageCode() === 'ar' ? 'rtl' : 'ltr'; 
+         /** kware start edit -- issue.7.8.001 */
   }
 
   /**

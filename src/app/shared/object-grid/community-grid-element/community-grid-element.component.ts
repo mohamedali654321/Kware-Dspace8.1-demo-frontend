@@ -21,6 +21,10 @@ import {
 import { listableObjectComponent } from '../../object-collection/shared/listable-object/listable-object.decorator';
 import { AbstractListableElementComponent } from '../../object-collection/shared/object-collection-element/abstract-listable-element.component';
 import { followLink } from '../../utils/follow-link-config.model';
+import { BitstreamDataService } from 'src/app/core/data/bitstream-data.service';
+import { LocaleService } from 'src/app/core/locale/locale.service';
+import { TruncatableService } from '../../truncatable/truncatable.service';
+import { KwareTranslatePipe } from "../../utils/kware-translate.pipe";
 
 /**
  * Component representing a grid element for a community
@@ -30,7 +34,7 @@ import { followLink } from '../../utils/follow-link-config.model';
   styleUrls: ['./community-grid-element.component.scss'],
   templateUrl: './community-grid-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, ThemedThumbnailComponent, AsyncPipe, TranslateModule],
+  imports: [NgIf, RouterLink, ThemedThumbnailComponent, AsyncPipe, TranslateModule, KwareTranslatePipe],
 })
 
 @listableObjectComponent(Community, ViewMode.GridElement)
@@ -39,7 +43,10 @@ export class CommunityGridElementComponent extends AbstractListableElementCompon
 
   constructor(
     public dsoNameService: DSONameService,
-    private linkService: LinkService,
+    protected linkService: LinkService,
+    protected truncatableService: TruncatableService,
+    protected bitstreamDataService: BitstreamDataService,
+    public localeService: LocaleService 
   ) {
     super(dsoNameService);
   }

@@ -7,7 +7,14 @@
 <div class="row">
   <div class="col-xs-12 col-md-4">
     <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
-      <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+      <ng-container *ngIf="!mediaViewer.image">
+        <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+          <ds-thumbnail [thumbnail]="object?.thumbnail | async"></ds-thumbnail>
+        </ds-metadata-field-wrapper>
+      </ng-container>
+      <ng-container *ngIf="mediaViewer.image">
+        <ds-media-viewer [item]="object"></ds-media-viewer> 
+            </ng-container>
     </ds-metadata-field-wrapper>
     <ds-generic-item-page-field [item]="object"
       [fields]="['publicationvolume.volumeNumber']"
@@ -19,24 +26,42 @@
     </ds-generic-item-page-field>
   </div>
   <div class="col-xs-12 col-md-6">
-    <ds-related-items
-      [parentItem]="object"
-      [relationType]="'isJournalOfVolume'"
-      [label]="'relationships.isSingleJournalOf' | translate">
-    </ds-related-items>
-    <ds-related-items
-      [parentItem]="object"
-      [relationType]="'isIssueOfJournalVolume'"
-      [label]="'relationships.isIssueOf' | translate">
-    </ds-related-items>
+
     <ds-generic-item-page-field [item]="object"
       [fields]="['dc.description']"
       [label]="'journalvolume.page.description'">
     </ds-generic-item-page-field>
+
+    <ds-related-items
+    [parentItem]="object"
+    [relationType]="'isJournalOfVolume'"
+    [label]="'relationships.isSingleJournalOf' | translate">
+  </ds-related-items>
+  <ds-related-items
+    [parentItem]="object"
+    [relationType]="'isIssueOfJournalVolume'"
+    [label]="'relationships.isIssueOf' | translate">
+  </ds-related-items>
     <div>
       <a class="btn btn-outline-primary" [routerLink]="[itemPageRoute + '/full']">
         {{"item.page.link.full" | translate}}
       </a>
     </div>
+  </div>
+  <div class="mt-5 w-100">
+    <ds-tabbed-related-entities-search  [item]="object"
+                                        [relationTypes]="[
+                                          {
+                                          label: 'isIssueOfJournalVolume',
+                                          filter: 'isJournalVolumeOfIssue',
+                                          configuration: 'journalIssue-relationships'
+                                        },
+                                        {
+                                          label: 'isJournalOfVolume',
+                                          filter: 'isVolumeOfJournal',
+                                          configuration: 'journal-relationships'
+                                        },
+                                        ]">
+    </ds-tabbed-related-entities-search>
   </div>
 </div>

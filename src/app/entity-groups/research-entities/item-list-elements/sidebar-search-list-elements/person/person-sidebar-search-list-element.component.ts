@@ -20,6 +20,7 @@ import { listableObjectComponent } from '../../../../../shared/object-collection
 import { SidebarSearchListElementComponent } from '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component';
 import { TruncatableService } from '../../../../../shared/truncatable/truncatable.service';
 import { TruncatablePartComponent } from '../../../../../shared/truncatable/truncatable-part/truncatable-part.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.SideBarSearchModal)
 @listableObjectComponent('PersonSearchResult', ViewMode.ListElement, Context.SideBarSearchModalCurrent)
@@ -27,7 +28,7 @@ import { TruncatablePartComponent } from '../../../../../shared/truncatable/trun
   selector: 'ds-person-sidebar-search-list-element',
   templateUrl: '../../../../../shared/object-list/sidebar-search-list-element/sidebar-search-list-element.component.html',
   standalone: true,
-  imports: [TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule],
+  imports: [TruncatablePartComponent, NgClass, NgIf, AsyncPipe, TranslateModule,KwareTranslatePipe],
 })
 /**
  * Component displaying a list element for a {@link ItemSearchResult} of type "Person" within the context of
