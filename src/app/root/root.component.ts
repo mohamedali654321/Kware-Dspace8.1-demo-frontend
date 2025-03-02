@@ -48,6 +48,7 @@ import { MenuID } from '../shared/menu/menu-id.model';
 import { NotificationsBoardComponent } from '../shared/notifications/notifications-board/notifications-board.component';
 import { CSSVariableService } from '../shared/sass-helper/css-variable.service';
 import { SystemWideAlertBannerComponent } from '../system-wide-alert/alert-banner/system-wide-alert-banner.component';
+import { ScrollToTopComponent } from "../shared/scroll-to-top/scroll-to-top.component";
 
 @Component({
   selector: 'ds-base-root',
@@ -69,7 +70,8 @@ import { SystemWideAlertBannerComponent } from '../system-wide-alert/alert-banne
     NotificationsBoardComponent,
     AsyncPipe,
     LiveRegionComponent,
-  ],
+    ScrollToTopComponent
+],
 })
 export class RootComponent implements OnInit {
   theme: Observable<ThemeConfig> = of({} as any);

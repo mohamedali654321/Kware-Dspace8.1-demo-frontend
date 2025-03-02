@@ -184,6 +184,7 @@ export class SearchComponent implements OnDestroy, OnInit {
    */
   @Input() selectionConfig: SelectionConfig;
 
+  @Input() filterFields: string;
   /**
    * A boolean representing if show csv export button
    */

@@ -17,6 +17,7 @@ import { LiveRegionComponent } from '../../../../app/shared/live-region/live-reg
 import { ThemedLoadingComponent } from '../../../../app/shared/loading/themed-loading.component';
 import { NotificationsBoardComponent } from '../../../../app/shared/notifications/notifications-board/notifications-board.component';
 import { SystemWideAlertBannerComponent } from '../../../../app/system-wide-alert/alert-banner/system-wide-alert-banner.component';
+import { ScrollToTopComponent } from 'src/app/shared/scroll-to-top/scroll-to-top.component';
 
 @Component({
   selector: 'ds-themed-root',
@@ -40,6 +41,7 @@ import { SystemWideAlertBannerComponent } from '../../../../app/system-wide-aler
     NotificationsBoardComponent,
     AsyncPipe,
     LiveRegionComponent,
+    ScrollToTopComponent
   ],
 })
 export class RootComponent extends BaseComponent {

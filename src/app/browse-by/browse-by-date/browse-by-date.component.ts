@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   isPlatformServer,
+  NgClass,
   NgIf,
 } from '@angular/common';
 import {
@@ -54,6 +55,8 @@ import {
   BrowseByMetadataComponent,
   browseParamsToOptions,
 } from '../browse-by-metadata/browse-by-metadata.component';
+import { ThemedConfigurationSearchPageComponent } from "../../search-page/themed-configuration-search-page.component";
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @Component({
   selector: 'ds-browse-by-date',
@@ -66,7 +69,10 @@ import {
     TranslateModule,
     ThemedLoadingComponent,
     ThemedBrowseByComponent,
-  ],
+    ThemedConfigurationSearchPageComponent,
+    NgClass,
+    KwareTranslatePipe
+],
 })
 /**
  * Component for browsing items by metadata definition of type 'date'

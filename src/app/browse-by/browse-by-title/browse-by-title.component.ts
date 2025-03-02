@@ -1,6 +1,7 @@
 import {
   AsyncPipe,
   isPlatformServer,
+  NgClass,
   NgIf,
 } from '@angular/common';
 import {
@@ -31,6 +32,8 @@ import {
   BrowseByMetadataComponent,
   browseParamsToOptions,
 } from '../browse-by-metadata/browse-by-metadata.component';
+import { ThemedConfigurationSearchPageComponent } from 'src/app/search-page/themed-configuration-search-page.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @Component({
   selector: 'ds-browse-by-title',
@@ -43,6 +46,9 @@ import {
     TranslateModule,
     ThemedLoadingComponent,
     ThemedBrowseByComponent,
+    ThemedConfigurationSearchPageComponent,
+    NgClass,
+    KwareTranslatePipe
   ],
 })
 /**

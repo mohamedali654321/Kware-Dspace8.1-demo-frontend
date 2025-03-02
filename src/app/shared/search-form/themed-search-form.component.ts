@@ -38,11 +38,14 @@ export class ThemedSearchFormComponent extends ThemedComponent<SearchFormCompone
 
   @Input() showScopeSelector: boolean;
 
+  @Input() filterFields?: string;
+
   @Output() submitSearch: EventEmitter<any> = new EventEmitter();
 
   protected inAndOutputNames: (keyof SearchFormComponent & keyof this)[] = [
     'query',
     'inPlaceSearch',
+    'filterFields',
     'scope',
     'hideScopeInUrl',
     'currentUrl',

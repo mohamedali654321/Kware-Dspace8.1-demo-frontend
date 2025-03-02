@@ -30,6 +30,7 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   protected inAndOutputNames: (keyof SearchComponent & keyof this)[] = [
     'configurationList',
     'context',
+    'filterFields',
     'configuration',
     'fixedFilterQuery',
     'hiddenQuery',
@@ -67,6 +68,8 @@ export class ThemedSearchComponent extends ThemedComponent<SearchComponent> {
   @Input() fixedFilterQuery: string;
 
   @Input() hiddenQuery: string;
+  
+  @Input() filterFields: string;
 
   @Input() useCachedVersionIfAvailable: boolean;
 

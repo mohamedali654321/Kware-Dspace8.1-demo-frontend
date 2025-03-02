@@ -7,10 +7,11 @@ import {
   OnInit,
 } from '@angular/core';
 import {
+  ActivatedRoute,
   Params,
   RouterLink,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RouteService } from 'src/app/core/services/route.service';
 
@@ -21,13 +22,16 @@ import { BrowseEntry } from '../../../core/shared/browse-entry.model';
 import { ViewMode } from '../../../core/shared/view-mode.model';
 import { listableObjectComponent } from '../../object-collection/shared/listable-object/listable-object.decorator';
 import { AbstractListableElementComponent } from '../../object-collection/shared/object-collection-element/abstract-listable-element.component';
+import { hasValue } from '../../empty.util';
+import { TranslateModule } from '@ngx-translate/core';
+import { KwareTranslatePipe } from '../../utils/kware-translate.pipe';
 
 @Component({
   selector: 'ds-browse-entry-list-element',
   styleUrls: ['./browse-entry-list-element.component.scss'],
   templateUrl: './browse-entry-list-element.component.html',
   standalone: true,
-  imports: [NgIf, RouterLink, AsyncPipe],
+  imports: [NgIf, RouterLink, AsyncPipe,KwareTranslatePipe,TranslateModule],
 })
 
 /**
@@ -40,16 +44,33 @@ export class BrowseEntryListElementComponent extends AbstractListableElementComp
    */
   queryParams$: Observable<Params>;
 
+  entryType:any;
+  EntityUrl:string;
+  isEntity:boolean;
+  isRights:boolean;
+  isAuthor:BehaviorSubject<boolean> = new BehaviorSubject(false);;
+
   constructor(
     public dsoNameService: DSONameService,
     protected paginationService: PaginationService,
     protected routeService: RouteService,
+    protected route: ActivatedRoute,
   ) {
     super(dsoNameService);
   }
 
   ngOnInit() {
     this.queryParams$ = this.getQueryParams();
+    this.route.data.subscribe(data=>{
+      data.id == 'author' ? this.isAuthor.next(true) : this.isAuthor.next(false) ;
+      console.log(data.id)
+      console.log(this.isAuthor)
+    })
+    this.queryParams$ = this.getQueryParams();
+    this.entryType=this.object._links;
+    this.EntityUrl= this.entryType.items.href;
+    this.isEntity= this.EntityUrl.includes('entityType');
+    this.isRights= this.EntityUrl.includes('rights');
   }
 
   /**
@@ -68,5 +89,25 @@ export class BrowseEntryListElementComponent extends AbstractListableElementComp
         };
       }),
     );
+  }
+
+  getEntity(name:string):string{
+    return 'search.filters.entityType.'+name;
+  }
+
+  getRights(name:string):string{
+    return 'search.filters.rights.'+name;
+  }
+
+  convertComma(str: string): string{
+    let newstr = '';
+    if ((typeof window === 'object' && hasValue(window.localStorage)) && window.localStorage.getItem('selectedLangCode')  === 'ar'){
+      let regx = /;|,/gi;
+     newstr = str.replace(regx, '،');
+     return newstr;
+
+    } else {
+      return str;
+    }
   }
 }

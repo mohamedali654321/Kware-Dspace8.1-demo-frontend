@@ -9,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SearchFormComponent as BaseComponent } from '../../../../../app/shared/search-form/search-form.component';
 import { BrowserOnlyPipe } from '../../../../../app/shared/utils/browser-only.pipe';
+import { ThemedHelpComponent } from 'src/app/info/help/themed-help.component';
+import { HelpSearchComponent } from 'src/app/shared/help-search/help-search.component';
 
 @Component({
   selector: 'ds-themed-search-form',
@@ -17,7 +19,7 @@ import { BrowserOnlyPipe } from '../../../../../app/shared/utils/browser-only.pi
   // templateUrl: './search-form.component.html',
   templateUrl: '../../../../../app/shared/search-form/search-form.component.html',
   standalone: true,
-  imports: [FormsModule, NgIf, NgbTooltipModule, AsyncPipe, TranslateModule, BrowserOnlyPipe],
+  imports: [FormsModule, NgIf, NgbTooltipModule, AsyncPipe, TranslateModule, BrowserOnlyPipe,HelpSearchComponent],
 })
 export class SearchFormComponent extends BaseComponent {
 }
