@@ -180,7 +180,9 @@ import { SeriesItemMetadataListElementComponent } from 'src/app/entity-groups/re
 import { SiteItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/site/site-item-metadata-list-element.component';
 import { SubOrgUnitItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/sub-org-unit/sub-org-unit-item-metadata-list-element.component';
 import { SubjectItemMetadataListElementComponent } from 'src/app/entity-groups/research-entities/metadata-representations/subject/subject-item-metadata-list-element.component';
-
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { ItemPageDescriptionFieldComponent } from 'src/app/item-page/simple/field-components/specific-field/description/item-page-description-field.component';
 const ENTRY_COMPONENTS = [
   BitstreamListItemComponent,
   BrowseEntryListElementComponent,
@@ -334,6 +336,7 @@ const ENTRY_COMPONENTS = [
   JournalVolumeItemMetadataListElementComponent,
   JournalIssueItemMetadataListElementComponent,
   JournalItemMetadataListElementComponent,
+  ItemPageDescriptionFieldComponent
   // kware end edit -- issue.8.0.021
 
 
@@ -344,6 +347,8 @@ const ENTRY_COMPONENTS = [
   imports: [
     CommonModule,
     RouterModule,
+    PdfJsViewerModule,
+    ScrollingModule,
     TranslateModule,
     ThemedLoadingComponent,
     TruncatableComponent,

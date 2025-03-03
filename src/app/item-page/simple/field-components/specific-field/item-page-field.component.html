@@ -1,4 +1,4 @@
-<div class="item-page-field">
+<!-- <div class="item-page-field">
   <ds-metadata-values
     [mdValues]="item?.allMetadata(fields)"
     [separator]="separator"
@@ -6,6 +6,18 @@
     [enableMarkdown]="enableMarkdown"
     [urlRegex]="urlRegex"
     [browseDefinition]="browseDefinition|async"
+    [img]="img"
+  ></ds-metadata-values>
+</div> -->
+
+
+<div class="item-page-field">
+  <ds-metadata-values
+    [mdValues]="item?.allMetadata(fields)"
+    [separator]="separator"
+    [label]="label"
+    [enableMarkdown]="enableMarkdown"
+    [urlRegex]="urlRegex"
     [img]="img"
   ></ds-metadata-values>
 </div>

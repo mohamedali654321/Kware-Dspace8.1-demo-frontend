@@ -106,4 +106,27 @@ export class ItemPageFieldComponent {
       return field === spec
         || (spec.endsWith('.*') && field.substring(0, spec.length - 1) === spec.substring(0, spec.length - 1));
     }
+
+    ngOnInit(): void {
+    
+      //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+      //Add 'implements OnInit' to the class.
+      (this.fields.includes('dc.description') || this.fields.includes('dc.description.abstract') || this.fields.includes('event.about') 
+      || this.fields.includes('organization.openingHoursSpecification') || this.fields.includes('place.openingHoursSpecification') || this.fields.includes('person.description.biography') || this.fields.includes('person.jobTitle.description')
+      || this.fields.includes('project.report') || this.fields.includes('dc.description.sub-property') || this.fields.includes('dc.description.tableofcontents') || this.fields.includes('dc.description.recommendations')
+      || this.fields.includes('dc.description.notes') || this.fields.includes('dc.description.introduction') || this.fields.includes('dc.description.conclusion')
+      || this.fields.includes('dc.description.usagerestrictions') || this.fields.includes('dc.description.maintenance') || this.fields.includes('dc.description.isrelated')
+      || this.fields.includes('dc.description.statementofresponsibility') || this.fields.includes('dc.description.isversionof') || this.fields.includes('publicationissue.title.theme')
+       ) 
+      ? this.enableMarkdown = true : this.enableMarkdown = false;
+     /**
+      * kware-edit start
+      * display metedata fields based on language iterface
+      *  */ 
+
+       /**
+      * kware-edit end  */ 
+
+      
+   }
 }

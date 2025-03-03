@@ -48,7 +48,7 @@ export class RelatedEntitiesSearchComponent implements OnInit {
    * The ratio of the sidebar's width compared to the search results (1-12) (defaults to 4)
    * @type {number}
    */
-  @Input() sideBarWidth = 4;
+  @Input() sideBarWidth = 2;
 
   fixedFilter: string;
 

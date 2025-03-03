@@ -10,11 +10,10 @@ import {
   ElementRef,
   Inject,
   Input,
-  OnInit,
   PLATFORM_ID,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import {
   APP_CONFIG,
@@ -44,7 +43,7 @@ import { AbstractIncrementalListComponent } from '../abstract-incremental-list/a
  * This component is used for displaying relations between items
  * It expects a parent item and relationship type, as well as a label to display on top
  */
-export class RelatedItemsComponent extends AbstractIncrementalListComponent<Observable<RemoteData<PaginatedList<Item>>>> implements OnInit {
+export class RelatedItemsComponent extends AbstractIncrementalListComponent<Observable<RemoteData<PaginatedList<Item>>>> {
 
   /**
    * The parent of the list of related items to display
@@ -86,6 +85,8 @@ export class RelatedItemsComponent extends AbstractIncrementalListComponent<Obse
    */
   fetchThumbnail: boolean;
 
+  RelationshipsCounter=new BehaviorSubject(0);
+
   constructor(public relationshipService: RelationshipDataService,
               protected elementRef: ElementRef,
               @Inject(APP_CONFIG) protected appConfig: AppConfig,
@@ -103,6 +104,11 @@ export class RelatedItemsComponent extends AbstractIncrementalListComponent<Obse
       this.placeholderFontClass = 'hide-placeholder-text';
     }
     super.ngOnInit();
+
+
+    this.getRelationshipsCounterByFilter(this.relationType).subscribe(res=>{
+     this.RelationshipsCounter.next(res.payload.totalElements);
+    })
   }
 
   /**
@@ -113,4 +119,9 @@ export class RelatedItemsComponent extends AbstractIncrementalListComponent<Obse
     return this.relationshipService.getRelatedItemsByLabel(this.parentItem, this.relationType, Object.assign(this.options,
       { elementsPerPage: this.incrementBy, currentPage: page, fetchThumbnail: this.fetchThumbnail }));
   }
+
+  getRelationshipsCounterByFilter(filterValue: any):Observable<RemoteData<PaginatedList<Item>>>{
+    return  this.relationshipService.getRelatedItemsByLabel(this.parentItem ,filterValue, Object.assign(this.options,
+        { elementsPerPage: -1, currentPage: 1, fetchThumbnail: false }))
+    }
 }

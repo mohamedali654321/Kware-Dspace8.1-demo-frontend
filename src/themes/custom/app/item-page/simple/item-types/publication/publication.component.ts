@@ -1,11 +1,5 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-} from '@angular/core';
+import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -28,22 +22,62 @@ import { MetadataFieldWrapperComponent } from '../../../../../../../app/shared/m
 import { listableObjectComponent } from '../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../../../../app/shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
+import { ItemPageCcLicenseFieldComponent } from 'src/app/item-page/simple/field-components/specific-field/cc-license/item-page-cc-license-field.component';
+import { ItemPageDescriptionFieldComponent } from 'src/app/item-page/simple/field-components/specific-field/description/item-page-description-field.component';
+import { TabbedRelatedEntitiesSearchComponent } from 'src/app/item-page/simple/related-entities/tabbed-related-entities-search/tabbed-related-entities-search.component';
+import { KwareMediaViewerComponent } from 'src/app/shared/kware-media-viewer/kware-media-viewer.component';
+import { SimpleViewStatisticsComponent } from 'src/app/shared/simple-view-statistics/simple-view-statistics.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 /**
  * Component that represents a publication Item page
  */
 
-@listableObjectComponent('Publication', ViewMode.StandalonePage, Context.Any, 'custom')
+@listableObjectComponent(
+  'Publication',
+  ViewMode.StandalonePage,
+  Context.Any,
+  'custom'
+)
 @Component({
   selector: 'ds-publication',
   // styleUrls: ['./publication.component.scss'],
-  styleUrls: ['../../../../../../../app/item-page/simple/item-types/publication/publication.component.scss'],
+  styleUrls: [
+    '../../../../../../../app/item-page/simple/item-types/publication/publication.component.scss',
+  ],
   // templateUrl: './publication.component.html',
-  templateUrl: '../../../../../../../app/item-page/simple/item-types/publication/publication.component.html',
+  templateUrl:
+    '../../../../../../../app/item-page/simple/item-types/publication/publication.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, ThemedResultsBackButtonComponent, MiradorViewerComponent, ThemedItemPageTitleFieldComponent, DsoEditMenuComponent, MetadataFieldWrapperComponent, ThemedThumbnailComponent, ThemedMediaViewerComponent, ThemedFileSectionComponent, ItemPageDateFieldComponent, ThemedMetadataRepresentationListComponent, GenericItemPageFieldComponent, RelatedItemsComponent, ItemPageAbstractFieldComponent, ItemPageUriFieldComponent, CollectionsComponent, RouterLink, AsyncPipe, TranslateModule],
+  imports: [
+    NgIf,
+    ThemedResultsBackButtonComponent,
+    MiradorViewerComponent,
+    ThemedItemPageTitleFieldComponent,
+    DsoEditMenuComponent,
+    MetadataFieldWrapperComponent,
+    ThemedThumbnailComponent,
+    ThemedMediaViewerComponent,
+    ThemedFileSectionComponent,
+    ItemPageDateFieldComponent,
+    ThemedMetadataRepresentationListComponent,
+    GenericItemPageFieldComponent,
+    RelatedItemsComponent,
+    ItemPageAbstractFieldComponent,
+    ItemPageUriFieldComponent,
+    CollectionsComponent,
+    RouterLink,
+    AsyncPipe,
+    TranslateModule,
+    TabbedRelatedEntitiesSearchComponent,
+    KwareMediaViewerComponent,
+    ItemPageCcLicenseFieldComponent,
+    SimpleViewStatisticsComponent,
+    ItemPageDescriptionFieldComponent,
+    KwareTranslatePipe,
+    NgStyle,
+    NgFor,
+  ],
 })
-export class PublicationComponent extends BaseComponent {
-
-}
+export class PublicationComponent extends BaseComponent {}

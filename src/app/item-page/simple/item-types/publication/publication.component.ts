@@ -1,11 +1,5 @@
-import {
-  AsyncPipe,
-  NgIf,
-} from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-} from '@angular/core';
+import { AsyncPipe, NgFor, NgIf, NgStyle } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -27,6 +21,13 @@ import { ItemPageUriFieldComponent } from '../../field-components/specific-field
 import { ThemedMetadataRepresentationListComponent } from '../../metadata-representation-list/themed-metadata-representation-list.component';
 import { RelatedItemsComponent } from '../../related-items/related-items-component';
 import { ItemComponent } from '../shared/item.component';
+import { TabbedRelatedEntitiesSearchComponent } from '../../related-entities/tabbed-related-entities-search/tabbed-related-entities-search.component';
+import { KwareMediaViewerComponent } from 'src/app/shared/kware-media-viewer/kware-media-viewer.component';
+import { ItemPageCcLicenseFieldComponent } from '../../field-components/specific-field/cc-license/item-page-cc-license-field.component';
+import { ItemPageDescriptionFieldComponent } from '../../field-components/specific-field/description/item-page-description-field.component';
+import { SimpleViewStatisticsComponent } from 'src/app/shared/simple-view-statistics/simple-view-statistics.component';
+import { KwareTranslatePipe } from "../../../../shared/utils/kware-translate.pipe";
+
 
 /**
  * Component that represents a publication Item page
@@ -39,8 +40,34 @@ import { ItemComponent } from '../shared/item.component';
   templateUrl: './publication.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, ThemedResultsBackButtonComponent, MiradorViewerComponent, ThemedItemPageTitleFieldComponent, DsoEditMenuComponent, MetadataFieldWrapperComponent, ThemedThumbnailComponent, ThemedMediaViewerComponent, ThemedFileSectionComponent, ItemPageDateFieldComponent, ThemedMetadataRepresentationListComponent, GenericItemPageFieldComponent, RelatedItemsComponent, ItemPageAbstractFieldComponent, ItemPageUriFieldComponent, CollectionsComponent, RouterLink, AsyncPipe, TranslateModule],
+  imports: [
+    NgIf,
+    ThemedResultsBackButtonComponent,
+    MiradorViewerComponent,
+    ThemedItemPageTitleFieldComponent,
+    DsoEditMenuComponent,
+    MetadataFieldWrapperComponent,
+    ThemedThumbnailComponent,
+    ThemedMediaViewerComponent,
+    ThemedFileSectionComponent,
+    ItemPageDateFieldComponent,
+    ThemedMetadataRepresentationListComponent,
+    GenericItemPageFieldComponent,
+    RelatedItemsComponent,
+    ItemPageAbstractFieldComponent,
+    ItemPageUriFieldComponent,
+    CollectionsComponent,
+    RouterLink,
+    AsyncPipe,
+    TranslateModule,
+    TabbedRelatedEntitiesSearchComponent,
+    KwareMediaViewerComponent,
+    ItemPageCcLicenseFieldComponent,
+    SimpleViewStatisticsComponent,
+    ItemPageDescriptionFieldComponent,
+    KwareTranslatePipe,
+    NgStyle,
+    NgFor,
+],
 })
-export class PublicationComponent extends ItemComponent {
-
-}
+export class PublicationComponent extends ItemComponent {}

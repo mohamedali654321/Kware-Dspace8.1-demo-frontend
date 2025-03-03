@@ -26,6 +26,8 @@ import { hasValue } from '../../../shared/empty.util';
 import { MetadataFieldWrapperComponent } from '../../../shared/metadata-field-wrapper/metadata-field-wrapper.component';
 import { MarkdownDirective } from '../../../shared/utils/markdown.directive';
 import { ImageField } from '../../simple/field-components/specific-field/image-field';
+import { KwareTranslatePipe } from "../../../shared/utils/kware-translate.pipe";
+import { MarkdownPipe } from "src/app/shared/utils/markdown.pipe";
 
 /**
  * This component renders the configured 'values' into the ds-metadata-field-wrapper component.
@@ -36,7 +38,7 @@ import { ImageField } from '../../simple/field-components/specific-field/image-f
   styleUrls: ['./metadata-values.component.scss'],
   templateUrl: './metadata-values.component.html',
   standalone: true,
-  imports: [MetadataFieldWrapperComponent, NgFor, NgTemplateOutlet, NgIf, RouterLink, AsyncPipe, TranslateModule, MarkdownDirective],
+  imports: [MetadataFieldWrapperComponent, NgFor, NgTemplateOutlet, NgIf, RouterLink, AsyncPipe, TranslateModule, MarkdownDirective, KwareTranslatePipe,MarkdownPipe,],
 })
 export class MetadataValuesComponent implements OnChanges {
 
@@ -86,6 +88,14 @@ export class MetadataValuesComponent implements OnChanges {
   @Input() img?: ImageField;
 
   hasValue = hasValue;
+
+    // kware edit
+    link: string;
+    check: boolean;
+    externalLinks: boolean;
+    orcidLinks: boolean;
+    rorLinks: boolean;
+  
 
   ngOnChanges(changes: SimpleChanges): void {
     this.renderMarkdown = !!this.appConfig.markdown.enabled && this.enableMarkdown;
@@ -145,5 +155,96 @@ export class MetadataValuesComponent implements OnChanges {
     } else {
       return { target: '_blank', rel: 'noopener noreferrer' };
     }
+  }
+
+  ngOnInit(): void {
+    //   this.mdValues=this.mdValues.filter( mdValue=>{return mdValue.language && mdValue.language === this.localeService.getCurrentLanguageCode()});
+    // console.log(this.mdValues);
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+
+    this.link = this.label?.split(".")[2];
+    this.orcidLinks = this.link === "identifierOrcid" ? true : false;
+    this.rorLinks = this.link === "ror" ? true : false;
+    if (this.link === "type") {
+      this.link = "itemtype";
+    }
+    // if(this.link === 'date') this.link="issued";
+
+    if (this.link === "date" || this.link === "issuedate") {
+      this.link = "issued";
+    }
+
+    if (this.link === "authoralternative") {
+      this.link = "author";
+    }
+
+    if (this.link === "advisoralternative") {
+      this.link = "advisor";
+    }
+
+    this.check =
+      this.link === "abstract" ||
+      this.link === "citation" ||
+      this.link === "description" ||
+      this.link === "biography" ||
+      this.link === "isbn" ||
+      this.link === "ddc" ||
+      this.link === "papersnumber" ||
+      this.link === "report" ||
+      this.link === "budget" ||
+      this.link === "acronym" ||
+      this.link === "ownershipFundingInfo" ||
+      this.link === "linesnumber" ||
+      this.link === "dimensions" ||
+      this.link === "introduction" ||
+      this.link === "conclusion" ||
+      this.link === "note" ||
+      this.link === "tableofcontents" ||
+      this.link === "isbn" ||
+      this.link === "usagerestrictions" ||
+      this.link === "maintenance" ||
+      this.link === "usagerestrictions" ||
+      this.link === "isrelated" ||
+      this.link === "statementofresponsibility" ||
+      this.link === "isversionof" ||
+      this.link === "jobTitleDescription" ||
+      this.link === "about" ||
+      this.link === "issuedhijri" ||
+      this.link === "title" ||
+      this.link === "name" ||
+      this.link === "telephone" ||
+      this.link === "openingHoursSpecification" ||
+      this.link === "address" ||
+      this.link === "organizationFoundingDate" ||
+      this.link === "journal-issn" ||
+      this.link === "issn" ||
+      this.link === "use" ||
+      this.link === "volume" ||
+      this.link === "number" ||
+      this.link === "journal-title" ||
+      this.link === "birthDateHijri" ||
+      this.link === "deathDateHijri" ||
+      this.link === "primaryContactAddress" ||
+      this.link === "technicalContactAddress" ||
+      this.link === "mainTitle" ||
+      this.link === "identifierSubject" ||
+      this.link === "headingName"
+        ? false
+        : true;
+
+    this.externalLinks =
+      this.link === "facebook" ||
+      this.link === "twitter" ||
+      this.link === "profile" ||
+      this.link === "wikipedia" ||
+      this.link === "email" ||
+      this.link === "reportUri" ||
+      this.link === "youtube" ||
+      this.link === "website" ||
+      this.link === "instagram" ||
+      this.link === "ror"
+        ? true
+        : false;
   }
 }
