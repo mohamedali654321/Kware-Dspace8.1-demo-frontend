@@ -1,3 +1,4 @@
+<div *ngIf="(relationshipMessageKey$ | async) !== 'isSubjectRelatingTo'">
 <h2 class="h4">
     {{relationshipMessageKey$ | async | translate}}
     <button class="ml-2 btn btn-success" [dsBtnDisabled]="(hasChanges | async)" (click)="openLookup()">
@@ -32,3 +33,4 @@
     </ng-container>
     <ds-loading *ngIf="loading$ | async"></ds-loading>
 </ng-container>
+</div>

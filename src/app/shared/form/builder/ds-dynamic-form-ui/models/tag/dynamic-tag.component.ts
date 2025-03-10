@@ -224,13 +224,18 @@ export class DsDynamicTagComponent extends DsDynamicVocabularyComponent implemen
    * @param event the keyUp event
    */
   onKeyUp(event) {
-    if (event.keyCode === 13 || event.keyCode === 188) {
-      event.preventDefault();
-      // Key: 'Enter' or ',' or ';'
-      this.addTagsToChips();
-      event.stopPropagation();
-    }
-  }
+    /* kware start edit -- issue.8.0.011
+-Add keywords in submission form issue when click on ('و') in keyboard
+*/
+// if (event.keyCode === 13 || event.keyCode === 188)
+if (event.keyCode === 13 ) {
+// kware end edit -- issue.8.0.011
+event.preventDefault();
+// Key: 'Enter' or ',' or ';'
+this.addTagsToChips();
+event.stopPropagation();
+}
+}
 
   /**
    * Prevent propagation of a key event in case of return key is pressed

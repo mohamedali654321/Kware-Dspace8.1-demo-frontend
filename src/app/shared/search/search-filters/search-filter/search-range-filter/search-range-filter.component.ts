@@ -42,6 +42,7 @@ import {
   RANGE_FILTER_MIN_SUFFIX,
 } from './search-range-filter-constants';
 import { LocaleService } from 'src/app/core/locale/locale.service';
+import { SharedVariableService } from 'src/app/core/services/share-variable.service';
 
 /**
  * This component renders a simple item page.
@@ -118,6 +119,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
               protected rdbs: RemoteDataBuildService,
               private translateService: TranslateService,
               public localeService: LocaleService , /* kware edit - call service from LocaleService */
+              protected sharedVariable: SharedVariableService,
               @Inject(SEARCH_CONFIG_SERVICE) public searchConfigService: SearchConfigurationService,
               @Inject(PLATFORM_ID) private platformId: any,
   ) {
@@ -126,6 +128,7 @@ export class SearchRangeFilterComponent extends SearchFacetFilterComponent imple
       filterService,
       rdbs,
       router,
+      sharedVariable,
       searchConfigService,
     );
   }

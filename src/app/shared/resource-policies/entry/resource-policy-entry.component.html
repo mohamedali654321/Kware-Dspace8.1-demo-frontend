@@ -14,8 +14,12 @@
   {{entry.id}}
 </th>
 <td>{{entry.policy.name}}</td>
-<td>{{entry.policy.policyType}}</td>
-<td>{{entry.policy.action}}</td>
+<!-- kware-edit start -->
+<td>{{entry.policy.policyType?('PolicyType.'+entry.policy.policyType | translate:{default:entry.policy.policyType }):null}}</td>
+<td>{{entry.policy.action?('ActionType.'+entry.policy.action | translate:{default:entry.policy.action}):null}}</td>
+<!-- kware-edit end -->
+<!-- <td>{{entry.policy.policyType}}</td>
+<td>{{entry.policy.action}}</td> -->
 <td>
   {{ epersonName$ | async }}
 </td>

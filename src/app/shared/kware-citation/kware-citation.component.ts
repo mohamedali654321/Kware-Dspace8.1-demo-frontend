@@ -41,7 +41,7 @@ export class KwareCitationComponent {
   }
 
   getCitationOfPublication() :any{
-    const authorData = this.object.allMetadataValues('dc.contributor.author').map((author)=>{
+    const authorData = this.object?.allMetadataValues('dc.contributor.author')?.map((author)=>{
       return {
 				given: this.convertComma(this.localeService.getStringByLocale((((author?.split(",")[1]))?.split(',undefined')[0])?.split(' null')[0])),
 				family: this.convertComma(this.localeService.getStringByLocale((((author?.split(",")[0]))?.split(',undefined')[0])?.split(' null')[0])),
@@ -53,9 +53,9 @@ export class KwareCitationComponent {
     const bibliographyData = [
        {
          id: this.object.uuid,
-         type: this.localeService.getStringByLocale(this.object.firstMetadataValue('dc.type')) ,
-         title: this.convertComma(this.localeService.getStringByLocale(this.object.firstMetadataValue('dc.title'))) ,
-         DOI: this.object.firstMetadataValue('dc.identifier.doi'),
+         type: this.localeService.getStringByLocale(this.object?.firstMetadataValue('dc.type')) ,
+         title: this.convertComma(this.localeService.getStringByLocale(this.object?.firstMetadataValue('dc.title'))) ,
+         DOI: this.object?.firstMetadataValue('dc.identifier.doi'),
          ...authorsEntry,
         //  author: [
         //    {
@@ -63,11 +63,11 @@ export class KwareCitationComponent {
         //      family: this.localeService.getStringByLocale((((this.object.firstMetadataValue('dc.contributor.author')?.split(",")[0]))?.split(',undefined')[0])?.split(' null')[0])
         //    }
         //  ],
-         issued: { "date-parts": [this.object.firstMetadataValue('dc.date.issued').split(/[- :]/)?.map(Number)] },
-         "container-title": this.convertComma(this.localeService.getStringByLocale(this.object.firstMetadataValue('journal.title'))) ,
-         volume: this.convertComma(this.localeService.getStringByLocale(this.object.firstMetadataValue('journalvolume.identifier.name'))) ,
-         issue: this.convertComma(this.localeService.getStringByLocale(this.object.firstMetadataValue('publicationissue.title'))) ,
-         publisher: this.convertComma(this.localeService.getStringByLocale(this.object.firstMetadataValue('dc.publisher')) || this.localeService.getStringByLocale(this.object.firstMetadataValue('dc.source'))) ,
+         issued: { "date-parts": [this.object.firstMetadataValue('dc.date.issued')?.split(/[- :]/)?.map(Number)] },
+         "container-title": this.convertComma(this.localeService.getStringByLocale(this.object?.firstMetadataValue('journal.title'))) ,
+         volume: this.convertComma(this.localeService.getStringByLocale(this.object?.firstMetadataValue('journalvolume.identifier.name'))) ,
+         issue: this.convertComma(this.localeService.getStringByLocale(this.object?.firstMetadataValue('publicationissue.title'))) ,
+         publisher: this.convertComma(this.localeService.getStringByLocale(this.object?.firstMetadataValue('dc.publisher')) || this.localeService.getStringByLocale(this.object?.firstMetadataValue('dc.source'))) ,
         //  page: "5441-5444"
        }
      ];

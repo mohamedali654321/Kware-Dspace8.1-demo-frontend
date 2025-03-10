@@ -18,6 +18,8 @@ import { SearchConfigurationService } from '../../../../core/shared/search/searc
 import { SearchFilterService } from '../../../../core/shared/search/search-filter.service';
 import { currentPath } from '../../../utils/route.utils';
 import { AppliedFilter } from '../../models/applied-filter.model';
+import { KwareCommaConvertPipe } from 'src/app/shared/utils/kware-comma-convert.pipe';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 /**
  * Component that represents the label containing the currently active filters
@@ -27,7 +29,7 @@ import { AppliedFilter } from '../../models/applied-filter.model';
   templateUrl: './search-label.component.html',
   styleUrls: ['./search-label.component.scss'],
   standalone: true,
-  imports: [RouterLink, AsyncPipe, TranslateModule],
+  imports: [RouterLink, AsyncPipe, TranslateModule, KwareCommaConvertPipe, KwareTranslatePipe],
 })
 export class SearchLabelComponent implements OnInit {
   @Input() inPlaceSearch: boolean;

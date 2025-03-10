@@ -5725,7 +5725,7 @@
 
   "workflow-item.scorereviewaction.button.confirm": "تأكيد",
 
-  "idle-modal.header": "Session will expire soon",
+  "idle-modal.header": "سوف تنتهي الجلسة قريبا",
 
   "idle-modal.info": "لأسباب أمنية، تنتهي جلسات المستخدم بعد {{ timeToExpire }} دقيقة من عدم النشاط. ستنتهي جلستك قريبًا. هل ترغب في تمديدها أم تسجيل الخروج؟",
 

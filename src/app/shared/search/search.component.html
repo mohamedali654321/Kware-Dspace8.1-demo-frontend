@@ -34,7 +34,12 @@
                 </button>
             </div>
             <ng-content select="[searchContentTop]"></ng-content>
-            <ds-search-results *ngIf="inPlaceSearch"
+                            <!-- kware-edit start  
+             - search tabs
+             -->
+             <ds-search-browse-categories *ngIf="(!(currentConfiguration$ | async) && isSearchPage === false)" [results]="resultsRD$" [SearchOptions]="browseSearchOptions | async" [searchConfig]="searchOptions$ | async "  ></ds-search-browse-categories>
+             <!-- kware-edit end  -->
+            <ds-search-results *ngIf=" ((currentConfiguration$ | async) || isSearchPage === true)"
                                       [searchResults]="resultsRD$ | async"
                                       [searchConfig]="searchOptions$ | async"
                                       [configuration]="(currentConfiguration$ | async)"

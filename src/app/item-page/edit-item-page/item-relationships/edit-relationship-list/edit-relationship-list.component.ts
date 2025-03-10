@@ -234,10 +234,32 @@ export class EditRelationshipListComponent implements OnInit, OnDestroy {
           const relationshipLabel = `${label.substring(2, label.indexOf('Of'))}`;
           if (relationshipLabel !== relatedEntityType.label) {
             return `relationships.is${relationshipLabel}Of.${relatedEntityType.label}`;
-          } else {
+          } 
+         else if (this.item.firstMetadataValue('dspace.entity.type') === 'Person' || this.item.firstMetadataValue('dspace.entity.type') === 'OrgUnit' )
+           {
+           return  this.item.firstMetadataValue('dspace.entity.type') === 'OrgUnit' &&  relatedEntityType.label === 'Person'  ?  `relationships.${this.relationshipType.leftwardType}` : `relationships.${this.relationshipType.rightwardType}`;
+         }
+         else if (this.item.firstMetadataValue('dspace.entity.type') === 'Journal' )
+          {
+          return  this.item.firstMetadataValue('dspace.entity.type') === 'Journal' &&  relatedEntityType.label === 'OrgUnit'  ?  `relationships.${this.relationshipType.leftwardType}.${relatedEntityType.label}` : `relationships.${this.relationshipType.rightwardType}`;
+        }
+          else {
             return `relationships.is${relationshipLabel}Of`;
           }
-        } else {
+        } 
+        else if ( this.item.firstMetadataValue('dspace.entity.type') === 'OrgUnit' && this.item.firstMetadataValue('organization.child.type') && label.includes('isOrgUnitLink') === true )
+          {
+            return `${label}.${this.item.firstMetadataValue('organization.child.type').split('|')[0].toLocaleLowerCase().split(" ").join("")}`;
+        }
+        else if ( this.item.firstMetadataValue('dspace.entity.type') === 'Place' && this.item.firstMetadataValue('place.type') && label.includes('isPlaceLink') === true )
+          {
+            return `${label}.${this.item.firstMetadataValue('place.type').split('|')[0].toLocaleLowerCase().split(" ").join("")}`    
+        }
+        else if ( this.item.firstMetadataValue('dspace.entity.type') === 'Event' && this.item.firstMetadataValue('event.mainType') && label.includes('isEventLink') === true )
+          {
+            return `${label}.${this.item.firstMetadataValue('event.mainType').split('|')[0].toLocaleLowerCase().split(" ").join("")}`    
+        }
+        else {
           return label;
         }
       }),

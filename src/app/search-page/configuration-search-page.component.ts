@@ -30,6 +30,7 @@ import { ThemedSearchFormComponent } from '../shared/search-form/themed-search-f
 import { PageWithSidebarComponent } from '../shared/sidebar/page-with-sidebar.component';
 import { SidebarService } from '../shared/sidebar/sidebar.service';
 import { ViewModeSwitchComponent } from '../shared/view-mode-switch/view-mode-switch.component';
+import { SearchBrowseCategoriesComponent } from '../shared/search-browse-categories/search-browse-categories.component';
 
 /**
  * This component renders a search page using a configuration as input.
@@ -47,7 +48,7 @@ import { ViewModeSwitchComponent } from '../shared/view-mode-switch/view-mode-sw
     },
   ],
   standalone: true,
-  imports: [NgIf, NgTemplateOutlet, PageWithSidebarComponent, ViewModeSwitchComponent, ThemedSearchResultsComponent, ThemedSearchSidebarComponent, ThemedSearchFormComponent, SearchLabelsComponent, AsyncPipe, TranslateModule],
+  imports: [NgIf, NgTemplateOutlet, PageWithSidebarComponent, ViewModeSwitchComponent, ThemedSearchResultsComponent, ThemedSearchSidebarComponent, ThemedSearchFormComponent, SearchLabelsComponent, AsyncPipe, TranslateModule,SearchBrowseCategoriesComponent],
 })
 
 export class ConfigurationSearchPageComponent extends SearchComponent {

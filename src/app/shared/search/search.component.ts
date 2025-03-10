@@ -83,6 +83,7 @@ import { SelectionConfig } from './search-results/search-results.component';
 import { ThemedSearchResultsComponent } from './search-results/themed-search-results.component';
 import { ThemedSearchSidebarComponent } from './search-sidebar/themed-search-sidebar.component';
 import { SearchConfigurationOption } from './search-switch-configuration/search-configuration-option.model';
+import { SearchBrowseCategoriesComponent } from '../search-browse-categories/search-browse-categories.component';
 
 @Component({
   selector: 'ds-base-search',
@@ -102,6 +103,7 @@ import { SearchConfigurationOption } from './search-switch-configuration/search-
     TranslateModule,
     SearchLabelsComponent,
     ViewModeSwitchComponent,
+    SearchBrowseCategoriesComponent
   ],
 })
 
@@ -348,6 +350,25 @@ export class SearchComponent implements OnDestroy, OnInit {
    */
   @Output() selectObject: EventEmitter<ListableObject> = new EventEmitter<ListableObject>();
 
+
+  
+   /**
+   * kware-edit start 
+   * search tabs
+   */
+ /**
+   * The active tab
+   */
+ activeTab$: Observable<string>;
+ browseSearchOptions =new BehaviorSubject({});
+
+ isSearchPage:boolean;
+ isCollection:boolean;
+ isCommunity:boolean;
+  /**
+* kware-edit end 
+*/
+
   constructor(protected service: SearchService,
               protected sidebarService: SidebarService,
               protected windowService: HostWindowService,
@@ -368,6 +389,9 @@ export class SearchComponent implements OnDestroy, OnInit {
    * If something changes, update the list of scopes for the dropdown
    */
   ngOnInit(): void {
+    this.isSearchPage=window.location.href.includes('/browse/')  ? true:false;
+    this.isCollection=window.location.href.includes('/collections/')  ? true:false;
+    this.isCommunity=window.location.href.includes('/communities/')  ? true:false;
     if (!this.renderOnServerSide && !environment.ssr.enableSearchComponent && isPlatformServer(this.platformId)) {
       this.subs.push(this.getSearchOptions().pipe(distinctUntilChanged()).subscribe((options) => {
         this.searchOptions$.next(options);
@@ -547,6 +571,16 @@ export class SearchComponent implements OnDestroy, OnInit {
       }
     }
 
+    
+         /**
+   * kware-edit start 
+   * search tabs
+   */
+   this.browseSearchOptions.next(searchOptions) ;
+
+   /**
+  * kware-edit end 
+  */
     this.service.search(
       searchOptionsWithHidden,
       undefined,
