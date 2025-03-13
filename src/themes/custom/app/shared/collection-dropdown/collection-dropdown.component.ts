@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -13,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { CollectionDropdownComponent as BaseComponent } from '../../../../../app/shared/collection-dropdown/collection-dropdown.component';
 import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed-loading.component';
+import { KwareTranslatePipe } from 'src/app/shared/utils/kware-translate.pipe';
 
 @Component({
   selector: 'ds-themed-collection-dropdown',
@@ -21,7 +23,7 @@ import { ThemedLoadingComponent } from '../../../../../app/shared/loading/themed
   styleUrls: ['../../../../../app/shared/collection-dropdown/collection-dropdown.component.scss'],
   // styleUrls: ['./collection-dropdown.component.scss']
   standalone: true,
-  imports: [NgIf, FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule],
+  imports: [NgIf, FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule,NgClass,KwareTranslatePipe],
 })
 export class CollectionDropdownComponent extends BaseComponent {
 

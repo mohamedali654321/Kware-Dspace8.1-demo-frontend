@@ -44,6 +44,7 @@ import {
 import { SectionsService } from '../../sections/sections.service';
 import { SectionsType } from '../../sections/sections-type';
 import { SubmissionService } from '../../submission.service';
+import { KwareTranslatePipe } from "../../../shared/utils/kware-translate.pipe";
 
 /**
  * This component allows to show the current collection the submission belonging to and to change it.
@@ -59,7 +60,8 @@ import { SubmissionService } from '../../submission.service';
     NgbDropdownModule,
     ThemedCollectionDropdownComponent,
     BtnDisabledDirective,
-  ],
+    KwareTranslatePipe
+],
 })
 export class SubmissionFormCollectionComponent implements OnDestroy, OnChanges, OnInit {
 
@@ -138,6 +140,25 @@ export class SubmissionFormCollectionComponent implements OnDestroy, OnChanges, 
    * @type {BehaviorSubject<boolean>}
    */
   available$: Observable<boolean>;
+
+        /*
+  kware start edit
+  - list collection length variable
+  **/
+  listCollectionLength: number;
+
+  /*
+  kware end edit
+  **/
+     /*
+   kware start edit
+   - check route if from fast add bt
+   */
+   currentEntityType ='';
+
+   isFastAdd:boolean;
+ 
+     /* kware end edit*/ 
 
   constructor(protected cdr: ChangeDetectorRef,
               private collectionDataService: CollectionDataService,
@@ -228,4 +249,18 @@ export class SubmissionFormCollectionComponent implements OnDestroy, OnChanges, 
       this.collectionDropdown?.reset();
     }
   }
+
+  
+        /* kware start edit
+  - get listCollectionLength to check if  > 1 or not
+
+  **/
+  getListCollectionLength($event: number){
+    this.listCollectionLength=$event;    
+   
+  }
+  /*
+  kware end edit
+  **/
+
 }

@@ -11,10 +11,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import {
   NgbActiveModal,
   NgbNavModule,
+  NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
@@ -37,7 +38,7 @@ import { RequestParam } from '../../../../../core/cache/models/request-param.mod
 import { ExternalSourceDataService } from '../../../../../core/data/external-source-data.service';
 import { FindListOptions } from '../../../../../core/data/find-list-options.model';
 import { LookupRelationService } from '../../../../../core/data/lookup-relation.service';
-import { PaginatedList } from '../../../../../core/data/paginated-list.model';
+import { buildPaginatedList, PaginatedList } from '../../../../../core/data/paginated-list.model';
 import { RelationshipDataService } from '../../../../../core/data/relationship-data.service';
 import { Context } from '../../../../../core/shared/context.model';
 import { DSpaceObject } from '../../../../../core/shared/dspace-object.model';
@@ -46,6 +47,7 @@ import { Item } from '../../../../../core/shared/item.model';
 import { RelationshipType } from '../../../../../core/shared/item-relationships/relationship-type.model';
 import {
   getAllSucceededRemoteDataPayload,
+  getFirstCompletedRemoteData,
   getFirstSucceededRemoteDataPayload,
 } from '../../../../../core/shared/operators';
 import { SearchConfigurationService } from '../../../../../core/shared/search/search-configuration.service';
@@ -54,6 +56,7 @@ import { BtnDisabledDirective } from '../../../../btn-disabled.directive';
 import {
   hasValue,
   isNotEmpty,
+  isNotNull,
 } from '../../../../empty.util';
 import { ThemedLoadingComponent } from '../../../../loading/themed-loading.component';
 import { ItemSearchResult } from '../../../../object-collection/shared/item-search-result.model';
@@ -71,6 +74,13 @@ import {
 } from './relationship.actions';
 import { ThemedDynamicLookupRelationSearchTabComponent } from './search-tab/themed-dynamic-lookup-relation-search-tab.component';
 import { DsDynamicLookupRelationSelectionTabComponent } from './selection-tab/dynamic-lookup-relation-selection-tab.component';
+import { CollectionDataService } from 'src/app/core/data/collection-data.service';
+import { RemoteData } from 'src/app/core/data/remote-data';
+import { SearchService } from 'src/app/core/shared/search/search.service';
+import { SubmissionObject } from 'src/app/core/submission/models/submission-object.model';
+import { CollectionSearchResult } from 'src/app/shared/object-collection/shared/collection-search-result.model';
+import { SubmissionService } from 'src/app/submission/submission.service';
+import { Collection } from 'src/app/core/shared/collection.model';
 
 @Component({
   selector: 'ds-dynamic-lookup-relation-modal',
@@ -93,6 +103,8 @@ import { DsDynamicLookupRelationSelectionTabComponent } from './selection-tab/dy
     NgForOf,
     DsDynamicLookupRelationSelectionTabComponent,
     BtnDisabledDirective,
+    RouterLink,
+    NgbTooltipModule
   ],
   standalone: true,
 })
@@ -213,6 +225,21 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
    */
   isPending = false;
 
+        /** kware start edit -- add fast add btn */
+  
+        collectionIdByEntity = '';
+  
+        submissionIdByEntity : string;
+      
+        modelPlaceholder: string;
+      
+       //check url
+       isWorkSpace:boolean;
+
+       relationshipLabel:string;
+      
+        /** kware end edit */
+
   constructor(
     public modal: NgbActiveModal,
     private selectableListService: SelectableListService,
@@ -224,6 +251,12 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
     private zone: NgZone,
     private store: Store<AppState>,
     private router: Router,
+                   /** kware start edit -- add fast add btn */
+   private searchService: SearchService,
+   private collectionDataService: CollectionDataService,
+   private submissionService: SubmissionService,
+   private route: ActivatedRoute
+   /** kware end edit */
   ) {
 
   }
@@ -277,6 +310,37 @@ export class DsDynamicLookupRelationModalComponent implements OnInit, OnDestroy 
     }
 
     this.setTotals();
+            /*
+    kware-edit start
+    -add fast add btn
+    - get collection by entity type 
+    */
+    // check if url has workspaceitems to display fast add btn
+    this.isWorkSpace = this.route.snapshot['_routerState'].url.includes('workspaceitems/') ? true:false;
+    let searchListService$: Observable<RemoteData<PaginatedList<Collection>>> = null;
+    searchListService$ = this.collectionDataService
+        .getAuthorizedCollection(this.relationshipOptions?.searchConfiguration === 'journal' ? this.relationshipOptions?.searchConfiguration+'~0':this.relationshipOptions?.searchConfiguration,{} ,true, false, followLink('parentCommunity'));
+        searchListService$.pipe(
+          getFirstCompletedRemoteData(),
+          map((rd) => Object.assign(new RemoteData(null, null, null, null), rd, {
+            payload: hasValue(rd.payload) ? buildPaginatedList(rd.payload.pageInfo, rd.payload.page.map((col) => Object.assign(new CollectionSearchResult(), { indexableObject: col }))) : null,
+          }))
+        );
+      searchListService$.subscribe(res=>{
+    if(res?.payload?.page[0]?.id !== this.collectionIdByEntity){
+      this.collectionIdByEntity = res?.payload?.page[0]?.id;
+      this.submissionService.createSubmission(this.collectionIdByEntity)
+      .subscribe((submissionObject: SubmissionObject) => {
+        // NOTE new submission is created on the browser side only
+        if (isNotNull(submissionObject)) {
+          if (isNotEmpty(submissionObject)) {
+            this.submissionIdByEntity = submissionObject?.id;
+        }
+      }})
+    
+    }
+        });
+    /* kware-edit end*/
   }
 
   close() {

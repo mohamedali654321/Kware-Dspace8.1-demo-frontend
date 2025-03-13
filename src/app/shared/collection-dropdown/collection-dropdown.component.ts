@@ -1,5 +1,6 @@
 import {
   AsyncPipe,
+  NgClass,
   NgFor,
   NgIf,
 } from '@angular/common';
@@ -53,6 +54,7 @@ import {
 import { hasValue } from '../empty.util';
 import { ThemedLoadingComponent } from '../loading/themed-loading.component';
 import { followLink } from '../utils/follow-link-config.model';
+import { KwareTranslatePipe } from "../utils/kware-translate.pipe";
 
 /**
  * An interface to represent a collection entry
@@ -76,7 +78,7 @@ export interface CollectionListEntry {
   templateUrl: './collection-dropdown.component.html',
   styleUrls: ['./collection-dropdown.component.scss'],
   standalone: true,
-  imports: [NgIf, FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule],
+  imports: [NgIf, FormsModule, ReactiveFormsModule, InfiniteScrollModule, NgFor, ThemedLoadingComponent, AsyncPipe, TranslateModule, NgClass,KwareTranslatePipe],
 })
 export class CollectionDropdownComponent implements OnInit, OnDestroy {
 
@@ -150,6 +152,29 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
    * Emit to notify the only selectable collection.
    */
   @Output() theOnlySelectable = new EventEmitter<CollectionListEntry>();
+
+  
+    /*
+ kware start edit
+ - length of search list collection
+ **/
+ @Output() searchListCollectionLength = new EventEmitter<number>();
+
+
+
+ @Input() selectedCollection: string;
+ /** kware end edit*/
+  
+       /*
+ kware start edit
+ - check route if from fast add bt
+ */
+currentEntityType ='';
+
+isFastAdd:boolean;
+
+  /* kware end edit*/ 
+
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -249,7 +274,8 @@ export class CollectionDropdownComponent implements OnInit, OnDestroy {
           followLink('parentCommunity'));
     } else {
       searchListService$ = this.collectionDataService
-        .getAuthorizedCollection(query, findOptions, true, true, followLink('parentCommunity'));
+      .getAuthorizedCollection(this.currentEntityType ? (this.currentEntityType ==='journal'? this.currentEntityType+'~0' : this.currentEntityType ) : query, findOptions, true, true, followLink('parentCommunity'));
+
     }
     this.searchListCollection$ = searchListService$.pipe(
       getFirstCompletedRemoteData(),

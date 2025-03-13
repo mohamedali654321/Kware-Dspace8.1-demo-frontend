@@ -125,6 +125,7 @@ import {
 import { ExistingRelationListElementComponent } from './existing-relation-list-element/existing-relation-list-element.component';
 import { DYNAMIC_FORM_CONTROL_TYPE_CUSTOM_SWITCH } from './models/custom-switch/custom-switch.model';
 import { DsDynamicLookupRelationModalComponent } from './relation-lookup-modal/dynamic-lookup-relation-modal.component';
+import { SharedVariableService } from 'src/app/core/services/share-variable.service';
 
 @Component({
   selector: 'ds-dynamic-form-control-container',
@@ -194,7 +195,10 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
   fetchThumbnail: boolean;
 
   get componentType(): Type<DynamicFormControl> | null {
-    return this.dynamicFormControlFn(this.model);
+         /* kware-edit start
+-hide input text in entity fields
+*/
+    return hasValue(this.model.relationship)? null : this.dynamicFormControlFn(this.model);
   }
 
   constructor(
@@ -214,6 +218,7 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     protected formBuilderService: FormBuilderService,
     protected submissionService: SubmissionService,
     protected metadataService: MetadataService,
+    protected sharedVariableService: SharedVariableService, //kware-edit mohamed
     @Inject(APP_CONFIG) protected appConfig: AppConfig,
     @Inject(DYNAMIC_FORM_CONTROL_MAP_FN) protected dynamicFormControlFn: DynamicFormControlMapFn,
   ) {
@@ -411,7 +416,6 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
         modalComp.query = this.model.value.value;
       }
     }
-
     modalComp.repeatable = this.model.repeatable;
     modalComp.listId = this.listId;
     modalComp.relationshipOptions = this.model.relationship;
@@ -420,6 +424,9 @@ export class DsDynamicFormControlContainerComponent extends DynamicFormControlCo
     modalComp.item = this.item;
     modalComp.collection = this.collection;
     modalComp.submissionId = this.model.submissionId;
+  /** kware start edit -- add fast add btn */
+   modalComp.modelPlaceholder = this.model.placeholder;
+  /** kware end edit */
   }
 
   /**

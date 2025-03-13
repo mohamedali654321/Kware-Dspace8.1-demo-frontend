@@ -21,7 +21,7 @@
   <li class="dropdown-item disabled" role="menuitem" *ngIf="searchListCollection?.length === 0 && (isLoading | async) !== true">
     {{'submission.sections.general.no-collection' | translate}}
   </li>
-  <ng-container *ngIf="searchListCollection?.length > 0">
+  <!-- <ng-container *ngIf="searchListCollection?.length > 0">
     <li *ngFor="let listItem of searchListCollection"
             class="dropdown-item collection-item"
             role="menuitem"
@@ -34,7 +34,30 @@
         <div class="list-item text-truncate text-primary font-weight-bold">{{ listItem.collection.name}}</div>
       </div>
     </li>
+  </ng-container> -->
+              <!-- kware start edit
+    - check if searchListCollection > 0 to display collection dropdown menu if not disabled it
+    - add background to selected collection
+    - compare between selected collection id and search list collection IDs   
+    - disabled click if selected collection 
+  -->
+  <ng-container *ngIf="searchListCollection?.length > 0">
+    <button *ngFor="let listItem of searchListCollection"
+            class="dropdown-item collection-item "
+            [ngClass]="{'bg-primary': listItem.collection.id === selectedCollection}"
+            title="{{ listItem.collection.name | kwareTranslate }}"
+            (click)="listItem.collection.id === selectedCollection ? $event.stopPropagation():onSelect(listItem)"
+            [disabled]="listItem.collection.id === selectedCollection"
+            >
+      <ul class="list-unstyled mb-0">
+        <li class="list-item text-truncate " *ngFor="let item of listItem.communities">
+          {{ item.name | kwareTranslate}} <i class="fa fa-level-down" aria-hidden="true"></i>
+        </li>
+        <li class="list-item text-truncate  font-weight-bold">{{ listItem.collection.name | kwareTranslate}}</li>
+      </ul>
+    </button>
   </ng-container>
+   <!-- kware end edit -->
   <li *ngIf="(isLoading | async)">
     <button class="dropdown-item disabled">
       <ds-loading message="{{'loading.default' | translate}}">
